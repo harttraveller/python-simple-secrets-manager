@@ -1,6 +1,7 @@
 import rich_click as click
 from pick import pick
 from stm.handler import tokens
+from stm.sep.term import vprint
 from stm.environment import PKG_VERSION
 
 
@@ -12,9 +13,10 @@ def entry():
     ...
 
 
-@entry.command(name="names")
+@entry.command(name="names", help="View the names of the saved tokens.")
 def tokens_names():
-    pass
+    for name in tokens.names:
+        vprint()
 
 
 @entry.command(name="view")
