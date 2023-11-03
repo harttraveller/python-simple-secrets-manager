@@ -61,9 +61,16 @@ class TokenHandler:
         self.check(name)
         return self.data[name]
 
-    def save(self, name: str, key: str) -> None:
+    def save(self, name: str, secret: str) -> None:
+        """
+        Save a new token.
+
+        Args:
+            name (str): name of new token
+            secret (str): token secret
+        """
         creds = self.data
-        creds[name] = key
+        creds[name] = secret
         save_toml(creds, PATH_TOKENS_DEFAULT)
 
     def delete(self, name: str) -> None:
