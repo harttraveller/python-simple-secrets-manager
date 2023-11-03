@@ -1,5 +1,5 @@
 from stm.sep.io import open_toml, save_toml
-from stm.environment import PATH_TOKENS_DEFAULT
+from stm.env import PATH_TOKENS_DEFAULT
 
 
 class TokenHandler:

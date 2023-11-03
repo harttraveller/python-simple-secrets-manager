@@ -1,8 +1,8 @@
 import rich_click as click
 from pick import pick
-from stm.handler import tokens
+from stm.core import tokens
 from stm.sep.term import vprint
-from stm.environment import PKG_VERSION
+from stm.env import PKG_VERSION
 
 
 @click.group(name="tokens")

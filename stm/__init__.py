@@ -1,1 +1,1 @@
-from stm.handler import tokens
+from stm.core import tokens
