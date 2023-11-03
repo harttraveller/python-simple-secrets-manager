@@ -77,7 +77,7 @@ class TokenHandler:
 
     def reload(self) -> None:
         self.__data = self.__load_tokens()
-        self.obj = TokenAccessor(tokens_dict=self.__data)
+        # self.obj = TokenAccessor(tokens_dict=self.__data)
 
     def erase(self, force: bool = False) -> None:
         "erase all tokens"
@@ -87,7 +87,12 @@ class TokenHandler:
             )
         setup.token_storage(erase=True)
 
-    def __dict__(self) -> dict:
+    def __iter__(self) -> dict:
+        for token_name, token_data in self.data.items():
+            yield token_name, token_data
+
+    @property
+    def data(self) -> dict:
         """
         Show token dictionary.
 
@@ -152,9 +157,11 @@ class TokenHandler:
             name (str): name of new token
             secret (str): token secret
         """
-        creds = self.data
-        creds[name] = secret
-        save_toml(creds, PATH_TOKENS_DEFAULT)
+        token = Token.make(name=name, secret=secret).model_dump()
+        del token["name"]
+        self.reload()
+        self.__data[name] = token
+        save_toml(self.__data, PATH_TOKENS_DEFAULT)
 
     def delete(self, name: str) -> None:
         """
@@ -176,6 +183,7 @@ if __name__ == "__main__":
     # vprint(token)
     # vprint(token.model_dump())
     tokens = TokenHandler()
+    tokens.erase(force=True)
     tokens.save(name="test", secret="asdf")
-    vprint(tokens.data)
+    vprint(dict(tokens))
     # vprint(tokens.obj.A)
