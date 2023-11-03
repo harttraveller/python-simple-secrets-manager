@@ -49,6 +49,15 @@ class TokenHandler:
             raise ValueError("token does not exist")
 
     def get(self, name: str) -> str:
+        """
+        Get a token secret.
+
+        Args:
+            name (str): name of stored token
+
+        Returns:
+            str: token secret
+        """
         self.check(name)
         return self.data[name]
 
