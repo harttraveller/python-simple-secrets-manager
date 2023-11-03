@@ -1,1 +1,1 @@
-from ssm.core import tokens
+from ssm.core import secrets
