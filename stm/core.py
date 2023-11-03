@@ -20,6 +20,7 @@ class Token(BaseModel):
     name: str
     secret: str
     created: PendulumDatetime = pendulum.now()
+    # delete_after # todo, delete after period
     # valid: Optional[bool] = None # known == unknown, True, validated, False, auto val failed
     # todo: can add expiry, other features etc later when actually needed
     # expiry: Optional[DateTime] = None
@@ -41,17 +42,40 @@ class Token(BaseModel):
 
 
 class TokenAccessor:
-    def __init__(self, token_data: dict) -> None:
-        pass
+    def __init__(self, tokens_dict: dict[dict]) -> None:
+        self.__attach(tokens_dict)
+
+    def __attach(self, tokens_dict: dict[dict]) -> None:
+        for token_name in tokens_dict.keys():
+            temp: dict = tokens_dict[token_name]
+            temp["name"] = token_name
+            setattr(self, token_name, Token.make(**temp))
 
 
 class TokenHandler:
     def __init__(self) -> None:
-        pass
+        self.reload()
 
-    def reload(self) -> None:
-        self.__data = open_toml(PATH_TOKENS_DEFAULT)
-        self.obj = TokenAccessor(token_data=self.__data)
+    @staticmethod
+    def __load_tokens() -> dict[dict]:
+        return open_toml(PATH_TOKENS_DEFAULT)
+
+    # * temp test
+    @staticmethod
+    def __load_test_tokens() -> dict[dict]:
+        return {"A": {"secret": "1234"}, "B": {"secret": "2345"}}
+
+    # todo
+    # def _count(self):
+    #     pass
+
+    # todo
+    # def _search(self):
+    #     pass
+
+    def reload(self, test: bool = False) -> None:
+        self.__data = self.__load_tokens() if not test else self.__load_test_tokens()
+        self.obj = TokenAccessor(tokens_dict=self.__data)
 
     def erase(self, force: bool = False) -> None:
         "erase all tokens"
@@ -146,3 +170,4 @@ if __name__ == "__main__":
     token = Token.make(name="test", secret="fakesecret")
     vprint(token)
     vprint(token.model_dump())
+    vprint(tokens.obj.A)
