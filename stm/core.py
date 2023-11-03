@@ -3,10 +3,11 @@ from __future__ import annotations
 import pendulum
 from pendulum.datetime import DateTime
 from typing import Optional, Union
-from pydantic import field_validator
+from pydantic import field_validator, BaseModel
 from pydantic.dataclasses import dataclass
 from stm.sep.io import open_toml, save_toml
 from stm.sep.term import vprint
+from stm.schema import PendulumDatetime
 from stm.env import PATH_TOKENS_DEFAULT
 
 # todo: imports for later use
@@ -14,11 +15,11 @@ from stm.env import PATH_TOKENS_DEFAULT
 # from pendulum.duration import Duration
 
 
-@dataclass
-class Token:
+# @dataclass
+class Token(BaseModel):
     name: str
     secret: str
-    created: DateTime = pendulum.now()
+    created: PendulumDatetime = pendulum.now()
     # valid: Optional[bool] = None # known == unknown, True, validated, False, auto val failed
     # todo: can add expiry, other features etc later when actually needed
     # expiry: Optional[DateTime] = None
@@ -128,4 +129,4 @@ tokens = TokenHandler()
 if __name__ == "__main__":
     token = Token.make(name="test", secret="fakesecret")
     vprint(token)
-    vprint(dict(token))
+    vprint(token.model_dump())
