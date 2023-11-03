@@ -16,6 +16,9 @@ class Token(BaseModel):
     created: DateTime = pendulum.now()
     expiry: Optional[DateTime] = None
 
+    def __str__(self):
+        return f"Token(name={self.name})"
+
     @staticmethod
     def make(
         name: str, secret: str, expiry: Union[datetime, DateTime], validate: bool
