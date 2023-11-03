@@ -15,14 +15,38 @@ class TokenHandler:
 
     @property
     def names(self) -> list[str]:
+        """
+        Return token names.
+
+        Returns:
+            list[str]: list of stored token names
+        """
         return list(self.data.keys())
 
     def exists(self, name: str) -> bool:
+        """
+        Check if token name exists.
+
+        Args:
+            name (str): name of stored token
+
+        Returns:
+            bool: True if exists, else False
+        """
         return name in self.names
 
     def check(self, name) -> None:
+        """
+        Check if token name exists, raises ValueError if False.
+
+        Args:
+            name (str): name of stored token
+
+        Raises:
+            ValueError: no available token
+        """
         if not self.exists(name):
-            raise ValueError("key does not exist")
+            raise ValueError("token does not exist")
 
     def get(self, name: str) -> str:
         self.check(name)
