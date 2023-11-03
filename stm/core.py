@@ -18,6 +18,7 @@ class Token:
     name: str
     secret: str
     created: DateTime = pendulum.now()
+    # valid: Optional[bool] = None # known == unknown, True, validated, False, auto val failed
     # todo: can add expiry, other features etc later when actually needed
     # expiry: Optional[DateTime] = None
 
