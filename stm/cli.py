@@ -16,7 +16,7 @@ def entry():
 @entry.command(name="names", help="View the names of the saved tokens.")
 def tokens_names():
     for name in tokens.names:
-        vprint()
+        vprint(name)
 
 
 @entry.command(name="view")
