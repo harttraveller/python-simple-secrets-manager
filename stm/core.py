@@ -10,6 +10,7 @@ from stm.env import PATH_TOKENS_DEFAULT
 class Token(BaseModel):
     name: str
     secret: str
+    created: DateTime
     expiry: Optional[DateTime] = None
 
 
