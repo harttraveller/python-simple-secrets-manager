@@ -40,7 +40,22 @@ class Token(BaseModel):
         return Token(name=name, secret=secret)
 
 
+class Tokens:
+    pass
+
+
 class TokenHandler:
+    def __init__(self) -> None:
+        pass
+
+    def reload(self) -> None:
+        self.__data = open_toml(PATH_TOKENS_DEFAULT)
+        # self.tokens
+
+    def erase(self, force: bool = False) -> None:
+        "erase all tokens"
+        raise NotImplementedError()
+
     @property
     def data(self) -> dict[str, str]:
         """
@@ -49,7 +64,7 @@ class TokenHandler:
         Returns:
             dict[str, str]: [token name]:[token secret] dictionary
         """
-        return open_toml(PATH_TOKENS_DEFAULT)
+        return self.__data
 
     @property
     def names(self) -> list[str]:
