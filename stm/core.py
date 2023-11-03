@@ -3,7 +3,8 @@ from __future__ import annotations
 import pendulum
 from pendulum.datetime import DateTime
 from typing import Optional, Union
-from pydantic import BaseModel, field_validator
+from pydantic import field_validator
+from pydantic.dataclasses import dataclass
 from stm.sep.io import open_toml, save_toml
 from stm.env import PATH_TOKENS_DEFAULT
 
@@ -12,7 +13,8 @@ from stm.env import PATH_TOKENS_DEFAULT
 # from pendulum.duration import Duration
 
 
-class Token(BaseModel):
+@dataclass
+class Token:
     name: str
     secret: str
     created: DateTime = pendulum.now()
