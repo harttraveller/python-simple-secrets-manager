@@ -4,6 +4,12 @@ from stm.sep.io import open_toml, save_toml
 from stm.env import PATH_TOKENS_DEFAULT
 
 
+# class Token(BaseModel):
+#     name: str
+#     secret: str
+#     expiry:
+
+
 class TokenHandler:
     @property
     def data(self) -> dict[str, str]:
