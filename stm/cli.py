@@ -43,14 +43,7 @@ def tokens_names():
         vprint(name)
 
 
-@entry.command(name="view")
-@click.option(
-    "--name",
-    "-n",
-    type=str,
-    help="Name of API token.",
-    required=False,
-)
+@entry.command(name="view", help="View a secret for a token.")
 @click.option(
     "--interactive/--arguments",
     "-i/-a",
@@ -58,17 +51,46 @@ def tokens_names():
     default=False,
     required=True,
 )
-def tokens_view(name: Optional[str], interactive: bool):
+@click.option(
+    "--name",
+    "-n",
+    type=str,
+    default=None,
+    help="Name of API token.",
+    required=True,
+)
+def tokens_view(interactive: bool, name: Optional[str]):
     pass
+    # if (name is None) and (not interactive):
+    #     vprint(
+    #         "\nYou must enter a token name (-n) or use interactive mode (-i).",
+    #         color="red",
+    #     )
 
 
 @entry.command(name="copy")
+@click.option(
+    "--interactive/--arguments",
+    "-i/-a",
+    type=bool,
+    default=False,
+    required=True,
+)
 def tokens_copy():
     pass
 
 
+# todo: add secure input mode
 @entry.command(name="save")
-def tokens_save():
+@click.option(
+    "--secure/--unsafe",
+    "-s/-u",
+    type=bool,
+    default=True,
+    required=True,
+    help="Secure input (interactive) mode, requires terminal access.",
+)
+def tokens_save(secure: bool):
     pass
 
 
