@@ -4,15 +4,15 @@ from stm.environment import PATH_TOKENS_DEFAULT
 
 class TokenHandler:
     @property
-    def data(self) -> dict:
+    def data(self) -> dict[str, str]:
         return open_toml(PATH_TOKENS_DEFAULT)
 
     @property
-    def tokens(self) -> list[str]:
+    def names(self) -> list[str]:
         return list(self.data.keys())
 
     def exists(self, name: str) -> bool:
-        return name in self.tokens
+        return name in self.names
 
     def check(self, name) -> None:
         if not self.exists(name):
