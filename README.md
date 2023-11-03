@@ -9,4 +9,4 @@
     - permanent (.bash_profile, .zshrc, etc)
 - tokens stale
 - implement known tokens automatic testing
--
+- implement token encryption/hashing (optional)
