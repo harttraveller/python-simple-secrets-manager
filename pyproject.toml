@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "simple-secrets-manager"
-packages = [{ include = "stm" }]
+packages = [{ include = "ssm" }]
 version = "0.1.0"
 description = "A simple secrets manager."
 readme = "README.md"
