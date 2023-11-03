@@ -74,6 +74,12 @@ class TokenHandler:
         save_toml(creds, PATH_TOKENS_DEFAULT)
 
     def delete(self, name: str) -> None:
+        """
+        Delete existing token.
+
+        Args:
+            name (str): name of stoed token
+        """
         self.check(name)
         creds = self.data
         del creds[name]
