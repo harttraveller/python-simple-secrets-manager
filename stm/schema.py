@@ -7,6 +7,7 @@ from pendulum.datetime import DateTime
 
 
 # todo.maybe: submit pull request to pydantic with add feature
+# * or sep into new mini package
 
 
 class PendulumDateTime(DateTime):
