@@ -40,7 +40,7 @@ class Token(BaseModel):
         return Token(name=name, secret=secret)
 
 
-class Tokens:
+class TokenAccessor:
     pass
 
 
