@@ -23,32 +23,32 @@ def partial_hide_secret(secret: str):
     return f"{secret[:quarter_secret]}{hidden}"
 
 
-def display_token_table(tokens: SecretHandler):
-    table = Table(title="Simple Token Manager: Saved Tokens", min_width=80)
+def display_token_table(secrets: SecretHandler):
+    table = Table(title="Simple Token Manager: Saved Secrets", min_width=80)
     table.add_column("Name", justify="left", style="cyan", no_wrap=True)
     table.add_column("Secret", justify="left", style="magenta", no_wrap=True)
-    for token_name, token_data in tokens.data.items():
+    for token_name, token_data in secrets.data.items():
         table.add_row(token_name, partial_hide_secret(token_data["secret"]))
     vprint(table)
 
 
-@click.group(name="tokens", invoke_without_command=True)
+@click.group(invoke_without_command=True)
 @click.version_option(PKG_VERSION)
 @click.pass_context
 def entry(ctx):
     # todo: cli message
     if ctx.invoked_subcommand is None:
-        ctx.invoke(tokens_show)
+        ctx.invoke(secrets_show)
 
 
-@entry.command(name="show", help="Show a table of tokens.")
-def tokens_show():
-    display_token_table(tokens)
+@entry.command(name="show", help="Show a table of secrets.")
+def secrets_show():
+    display_token_table(secrets)
 
 
-@entry.command(name="names", help="View the names of the saved tokens.")
-def tokens_names():
-    for name in tokens.names:
+@entry.command(name="names", help="View the names of the saved secrets.")
+def secrets_names():
+    for name in secrets.names:
         vprint(name)
 
 
@@ -68,7 +68,7 @@ def tokens_names():
     help="Name of API token.",
     required=True,
 )
-def tokens_view(interactive: bool, name: Optional[str]):
+def secrets_view(interactive: bool, name: Optional[str]):
     pass
     # if (name is None) and (not interactive):
     #     vprint(
@@ -85,7 +85,7 @@ def tokens_view(interactive: bool, name: Optional[str]):
     default=False,
     required=True,
 )
-def tokens_copy():
+def secrets_copy():
     pass
 
 
@@ -99,7 +99,7 @@ def tokens_copy():
     required=True,
     help="Secure input (interactive) mode, requires terminal access.",
 )
-def tokens_save(secure: bool):
+def secrets_save(secure: bool):
     if secure:
         pass
     else:
@@ -109,8 +109,8 @@ def tokens_save(secure: bool):
 
 
 @entry.command(name="del")
-def tokens_delete():
-    # api_token = tokens.get(selection[0])
+def secrets_delete():
+    # api_token = secrets.get(selection[0])
     # subprocess.run("pbcopy", text=True, input=api_token)
     # vprint(f"[green]{selection[0].title()} Token Copied[/green]")
     ...

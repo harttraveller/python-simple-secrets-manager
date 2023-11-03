@@ -4,8 +4,6 @@ import subprocess
 
 # %%
 
-print(platform.system())
-
 
 def to_clipboard(text: str) -> None:
     opsys = platform.system().lower()
