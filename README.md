@@ -1,0 +1,3 @@
+- token rotatation period
+- token expiration period
+- tokens stale
