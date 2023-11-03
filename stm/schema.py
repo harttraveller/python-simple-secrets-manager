@@ -70,7 +70,7 @@ class _PendulumDateTime(DateTime):
                 ]
             ),
             serialization=core_schema.plain_serializer_function_ser_schema(
-                lambda instance: instance.x
+                lambda instance: str(instance)
             ),
         )
 
