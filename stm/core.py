@@ -3,6 +3,7 @@ from __future__ import annotations
 import pendulum
 
 from pydantic import BaseModel, field_validator
+from stm import setup
 from stm.sep.io import open_toml, save_toml
 from stm.sep.term import vprint
 from stm.schema import PendulumDatetime
@@ -54,6 +55,7 @@ class TokenAccessor:
 
 class TokenHandler:
     def __init__(self) -> None:
+        setup.token_storage()
         self.reload()
 
     @staticmethod
@@ -79,10 +81,13 @@ class TokenHandler:
 
     def erase(self, force: bool = False) -> None:
         "erase all tokens"
-        raise NotImplementedError()
+        if not force:
+            raise ValueError(
+                "to avoid accidentally erasing your tokens, you must pass True to 'force'"
+            )
+        setup.token_storage(erase=True)
 
-    @property
-    def data(self) -> dict[str, str]:
+    def __dict__(self) -> dict:
         """
         Show token dictionary.
 
@@ -167,8 +172,10 @@ class TokenHandler:
 tokens = TokenHandler()
 
 if __name__ == "__main__":
-    token = Token.make(name="test", secret="fakesecret")
-    vprint(token)
-    vprint(token.model_dump())
+    # token = Token.make(name="test", secret="fakesecret")
+    # vprint(token)
+    # vprint(token.model_dump())
     tokens = TokenHandler()
-    vprint(tokens.obj.A)
+    tokens.save(name="test", secret="asdf")
+    vprint(tokens.data)
+    # vprint(tokens.obj.A)
