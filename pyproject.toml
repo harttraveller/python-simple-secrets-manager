@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "simple-token-manager"
+name = "simple-secrets-manager"
 packages = [{ include = "stm" }]
 version = "0.1.0"
-description = "A simple token manager."
+description = "A simple secrets manager."
 readme = "README.md"
-repository = "https://github.com/harttraveller/simple-token-manager"
-documentation = "https://harttraveller.com/posts/docs.simple-token-manager"
+repository = "https://github.com/harttraveller/simple-secrets-manager"
+documentation = "https://harttraveller.com/posts/docs.simple-secrets-manager"
 authors = ["Hart Traveller <ruling_fiction.0b@icloud.com>"]
 maintainers = ["Hart Traveller <ruling_fiction.0b@icloud.com>"]
 
@@ -20,14 +20,12 @@ pendulum = "^2.1.2"
 pydantic = "^2.4.2"
 loguru = "^0.7.2"
 
-
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 secrets = "ssm.cli:entry"
-
 
 [[tool.poetry.source]]
 name = "PyPI"
