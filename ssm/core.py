@@ -62,9 +62,8 @@ class SecretHandler:
     def __load_secrets() -> dict[dict]:
         return open_toml(PATH_SECRETS_DEFAULT)
 
-    # todo
-    # def _count(self):
-    #     pass
+    def count(self) -> int:
+        return len(self.data)
 
     # todo
     # def _search(self):
@@ -172,14 +171,3 @@ class SecretHandler:
 
 
 secrets = SecretHandler()
-
-if __name__ == "__main__":
-    # token = Token.make(name="test", secret="fakesecret")
-    # vprint(token)
-    # vprint(token.model_dump())
-    secrets = SecretHandler()
-    secrets.erase(force=True)
-    secrets.save(name="test", secret="asdf")
-    vprint(dict(secrets))
-    vprint(secrets.secret("test"))
-    # vprint(secrets.obj.A)
