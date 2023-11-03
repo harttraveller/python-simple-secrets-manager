@@ -3,7 +3,7 @@ from rich.table import Table
 from pick import pick
 from loguru import logger as log
 from typing import Optional
-from ssm.core import tokens, SecretHandler
+from ssm.core import secrets, SecretHandler
 from ssm.sep.term import vprint
 from ssm.sep.system import to_clipboard
 from ssm.env import PKG_VERSION
