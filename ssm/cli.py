@@ -24,7 +24,7 @@ def partial_hide_secret(secret: str):
 
 
 def display_token_table(secrets: SecretHandler):
-    table = Table(title="Simple Secret Manager: Secrets", min_width=80)
+    table = Table(title="Simple Secret Manager Secrets", min_width=80)
     table.add_column("Name", justify="left", style="cyan", no_wrap=True)
     table.add_column("Secret", justify="left", style="magenta", no_wrap=True)
     for token_name, token_data in secrets.data.items():
@@ -38,12 +38,25 @@ def display_token_table(secrets: SecretHandler):
 def entry(ctx):
     # todo: cli message
     if ctx.invoked_subcommand is None:
-        ctx.invoke(secrets_show)
+        ctx.invoke(secrets_wizard)
 
 
-@entry.command(name="show", help="Show a table of secrets.")
-def secrets_show():
-    display_token_table(secrets)
+# todo: command.security - review revolving, checks
+# todo: command.peek
+# todo: keep
+
+
+@entry.command(name="wizard", help="Secrets CLI wizard.")
+def secrets_wizard():
+    pass
+
+
+@entry.command(name="table", help="Show a table of secrets.")
+def secrets_table():
+    if secrets.count():
+        display_token_table(secrets)
+    else:
+        vprint("You haven't saved any secrets yet...", color="yellow")
 
 
 @entry.command(name="names", help="View the names of the saved secrets.")
