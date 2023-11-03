@@ -1,3 +1,4 @@
 - token rotatation period
 - token expiration period
+- add token to environment variables
 - tokens stale
