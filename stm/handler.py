@@ -35,7 +35,7 @@ class TokenHandler:
         """
         return name in self.names
 
-    def check(self, name) -> None:
+    def check(self, name: str) -> None:
         """
         Check if token name exists, raises ValueError if False.
 
