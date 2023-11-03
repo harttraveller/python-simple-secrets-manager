@@ -1,27 +1,33 @@
 from __future__ import annotations
 
 import pendulum
-from datetime import datetime
 from pendulum.datetime import DateTime
-from pendulum.duration import Duration
 from typing import Optional, Union
 from pydantic import BaseModel, field_validator
 from stm.sep.io import open_toml, save_toml
 from stm.env import PATH_TOKENS_DEFAULT
+
+# todo: imports for later use
+# from datetime import datetime
+# from pendulum.duration import Duration
 
 
 class Token(BaseModel):
     name: str
     secret: str
     created: DateTime = pendulum.now()
-    expiry: Optional[DateTime] = None
+    # todo: can add expiry, other features etc later when actually needed
+    # expiry: Optional[DateTime] = None
 
     def __str__(self):
         return f"Token(name={self.name})"
 
+    # todo: can add validation, params/features later when needed
+    # validate: bool, expiry: Union[datetime, DateTime],
     @staticmethod
     def make(
-        name: str, secret: str, expiry: Union[datetime, DateTime], validate: bool
+        name: str,
+        secret: str,
     ) -> Token:
         raise NotImplementedError()
 
