@@ -1,6 +1,7 @@
 import rich_click as click
 from rich.table import Table
 from pick import pick
+from loguru import logger as log
 from typing import Optional
 from stm.core import tokens, TokenHandler
 from stm.sep.term import vprint
@@ -91,7 +92,12 @@ def tokens_copy():
     help="Secure input (interactive) mode, requires terminal access.",
 )
 def tokens_save(secure: bool):
-    pass
+    if secure:
+        pass
+    else:
+        log.critical(
+            "Passing a token as an argument will leave it in your terminal history, and is not recommended."
+        )
 
 
 @entry.command(name="del")
