@@ -147,7 +147,7 @@ class TokenHandler:
             str: token secret
         """
         self.check(name)
-        return self.data[name]
+        return self.data[name]["secret"]
 
     def save(self, name: str, secret: str) -> None:
         """
