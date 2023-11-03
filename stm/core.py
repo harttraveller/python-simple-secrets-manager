@@ -6,6 +6,7 @@ from typing import Optional, Union
 from pydantic import field_validator
 from pydantic.dataclasses import dataclass
 from stm.sep.io import open_toml, save_toml
+from stm.sep.term import vprint
 from stm.env import PATH_TOKENS_DEFAULT
 
 # todo: imports for later use
@@ -35,7 +36,7 @@ class Token:
         name: str,
         secret: str,
     ) -> Token:
-        raise NotImplementedError()
+        return Token(name=name, secret=secret)
 
 
 class TokenHandler:
@@ -123,3 +124,8 @@ class TokenHandler:
 
 
 tokens = TokenHandler()
+
+if __name__ == "__main__":
+    token = Token.make(name="test", secret="fakesecret")
+    vprint(token)
+    vprint(dict(token))
