@@ -93,7 +93,7 @@ def secrets_view(interactive: bool, name: Optional[str]):
     #     )
 
 
-@entry.command(name="copy")
+@entry.command(name="copy", help="Copy a secret key to your clipboard.")
 @click.option(
     "--interactive/--arguments",
     "-i/-a",
@@ -105,8 +105,13 @@ def secrets_copy():
     pass
 
 
+@entry.command(name="edit", help="Edit an existing secret.")
+def secrets_edit():
+    pass
+
+
 # todo: add secure input mode
-@entry.command(name="keep")
+@entry.command(name="keep", help="Keep (ie: save) a new secret.")
 @click.option(
     "--secure/--unsafe",
     "-s/-u",
@@ -115,6 +120,7 @@ def secrets_copy():
     required=True,
     help="Secure input (interactive) mode, requires terminal access.",
 )
+# todo: overwrite option
 def secrets_keep(secure: bool):
     if secure:
         pass
@@ -124,9 +130,12 @@ def secrets_keep(secure: bool):
         )
 
 
-@entry.command(name="forget")
+@entry.command(name="forget", help="Forget (ie: delete) a secret.")
 def secrets_forget():
     # api_token = secrets.get(selection[0])
     # subprocess.run("pbcopy", text=True, input=api_token)
     # vprint(f"[green]{selection[0].title()} Token Copied[/green]")
     ...
+
+
+# @entry.command(name="config", help="Configuration.")

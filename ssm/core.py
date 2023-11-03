@@ -21,6 +21,9 @@ class Secret(BaseModel):
     name: str
     key: str
     created: PendulumDatetime = pendulum.now()
+    # service # todo
+    # user # todo
+    # scope # todo
     # delete_after # todo, delete after period
     # valid: Optional[bool] = None # known == unknown, True, validated, False, auto val failed
     # todo: can add expiry, other features etc later when actually needed
@@ -35,11 +38,18 @@ class Secret(BaseModel):
     # todo: can add validation, params/features later when needed
     # validate: bool, expiry: Union[datetime, DateTime],
     @staticmethod
-    def keep(
+    def make(
         name: str,
         key: str,
     ) -> Secret:
         return Secret(name=name, key=key)
+
+    # age, measure in hours, days, weeks, etc
+    def age(self, measure):
+        pass
+
+    def time_to_expiry(self):
+        pass
 
 
 class SecretAccessor:
@@ -50,7 +60,7 @@ class SecretAccessor:
         for secret_name in secrets_dict.keys():
             temp: dict = secrets_dict[secret_name]
             temp["name"] = secret_name
-            setattr(self, secret_name, Secret.keep(**temp))
+            setattr(self, secret_name, Secret.make(**temp))
 
 
 class SecretHandler:
@@ -151,7 +161,7 @@ class SecretHandler:
             name (str): name of new token
             secret (str): token secret
         """
-        token = Secret.keep(name=name, key=secret).model_dump()
+        token = Secret.make(name=name, key=secret).model_dump()
         del token["name"]
         self.reload()
         self.__data[name] = token
