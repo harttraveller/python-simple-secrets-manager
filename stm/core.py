@@ -1,5 +1,6 @@
 import pendulum
 from pendulum.datetime import DateTime
+from pendulum.duration import Duration
 from pydantic import BaseModel, field_validator
 from typing import Optional
 from stm.sep.io import open_toml, save_toml
