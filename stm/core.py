@@ -1,10 +1,8 @@
 from __future__ import annotations
 
 import pendulum
-from pendulum.datetime import DateTime
-from typing import Optional, Union
-from pydantic import field_validator, BaseModel
-from pydantic.dataclasses import dataclass
+
+from pydantic import BaseModel, field_validator
 from stm.sep.io import open_toml, save_toml
 from stm.sep.term import vprint
 from stm.schema import PendulumDatetime
@@ -13,6 +11,8 @@ from stm.env import PATH_TOKENS_DEFAULT
 # todo: imports for later use
 # from datetime import datetime
 # from pendulum.duration import Duration
+# from pendulum.datetime import DateTime
+# from typing import Optional, Union
 
 
 # @dataclass
