@@ -124,8 +124,8 @@ def secrets_keep(secure: bool):
         )
 
 
-@entry.command(name="del")
-def secrets_delete():
+@entry.command(name="forget")
+def secrets_forget():
     # api_token = secrets.get(selection[0])
     # subprocess.run("pbcopy", text=True, input=api_token)
     # vprint(f"[green]{selection[0].title()} Token Copied[/green]")
