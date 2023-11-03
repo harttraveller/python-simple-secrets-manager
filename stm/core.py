@@ -1,3 +1,5 @@
+from pydantic import BaseModel
+
 from stm.sep.io import open_toml, save_toml
 from stm.env import PATH_TOKENS_DEFAULT
 
