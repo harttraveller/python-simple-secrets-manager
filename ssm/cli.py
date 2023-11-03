@@ -33,7 +33,7 @@ def display_token_table(secrets: SecretHandler):
 
 
 @click.group(invoke_without_command=True)
-@click.version_option(PKG_VERSION)
+@click.version_option(PKG_VERSION, prog_name="Simple Secrets Manager")
 @click.pass_context
 def entry(ctx):
     # todo: cli message
@@ -52,6 +52,8 @@ def secrets_wizard():
 
 
 @entry.command(name="table", help="Show a table of secrets.")
+# @click.option("--sort")
+# @click.option("--filter") *regex
 def secrets_table():
     if secrets.count():
         display_token_table(secrets)
