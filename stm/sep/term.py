@@ -1,6 +1,7 @@
 import os
 from typing import Any
 from rich.console import Console
+from rich.color import ANSI_COLOR_NAMES
 
 # todo: move utils to separate package
 
