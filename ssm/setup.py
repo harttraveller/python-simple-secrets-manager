@@ -1,6 +1,6 @@
 import os
-from stm.sep.io import save_toml
-from stm.env import PATH_STORE_DEFAULT, PATH_TOKENS_DEFAULT
+from ssm.sep.io import save_toml
+from ssm.env import PATH_STORE_DEFAULT, PATH_TOKENS_DEFAULT
 
 
 def token_storage(erase: bool = False):

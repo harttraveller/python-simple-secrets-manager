@@ -3,9 +3,10 @@ from rich.table import Table
 from pick import pick
 from loguru import logger as log
 from typing import Optional
-from stm.core import tokens, TokenHandler
-from stm.sep.term import vprint
-from stm.env import PKG_VERSION
+from ssm.core import tokens, TokenHandler
+from ssm.sep.term import vprint
+from ssm.sep.system import to_clipboard
+from ssm.env import PKG_VERSION
 
 
 def warn(msg: str, crit: bool = False) -> None:
@@ -109,4 +110,7 @@ def tokens_save(secure: bool):
 
 @entry.command(name="del")
 def tokens_delete():
-    pass
+    # api_token = tokens.get(selection[0])
+    # subprocess.run("pbcopy", text=True, input=api_token)
+    # vprint(f"[green]{selection[0].title()} Token Copied[/green]")
+    ...

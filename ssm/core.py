@@ -3,11 +3,11 @@ from __future__ import annotations
 import pendulum
 
 from pydantic import BaseModel, field_validator
-from stm import setup
-from stm.sep.io import open_toml, save_toml
-from stm.sep.term import vprint
-from stm.schema import PendulumDatetime
-from stm.env import PATH_TOKENS_DEFAULT
+from ssm import setup
+from ssm.sep.io import open_toml, save_toml
+from ssm.sep.term import vprint
+from ssm.schema import PendulumDatetime
+from ssm.env import PATH_TOKENS_DEFAULT
 
 # todo: imports for later use
 # from datetime import datetime
