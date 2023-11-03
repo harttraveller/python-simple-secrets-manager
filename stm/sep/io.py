@@ -2,6 +2,8 @@ import toml
 from pathlib import Path
 from typing import Union
 
+# todo: replace with pyeio and integrate there
+
 
 def open_toml(path: Union[str, Path]) -> dict:
     "Open a toml file."
