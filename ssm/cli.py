@@ -51,20 +51,21 @@ def secrets_wizard():
     pass
 
 
-@entry.command(name="table", help="Show a table of secrets.")
+@entry.command(name="list", help="List secrets in a table.")
 # @click.option("--sort")
 # @click.option("--filter") *regex
 def secrets_table():
     if secrets.count():
         display_token_table(secrets)
+        # for name in secrets.names:
+        #     vprint(name)
     else:
         vprint("You haven't saved any secrets yet...", color="yellow")
 
 
-@entry.command(name="names", help="View the names of the saved secrets.")
-def secrets_names():
-    for name in secrets.names:
-        vprint(name)
+@entry.command(name="find", help="View the names of the saved secrets.")
+def secrets_find():
+    pass
 
 
 @entry.command(name="view", help="View a secret for a token.")
@@ -105,7 +106,7 @@ def secrets_copy():
 
 
 # todo: add secure input mode
-@entry.command(name="save")
+@entry.command(name="keep")
 @click.option(
     "--secure/--unsafe",
     "-s/-u",
@@ -114,7 +115,7 @@ def secrets_copy():
     required=True,
     help="Secure input (interactive) mode, requires terminal access.",
 )
-def secrets_save(secure: bool):
+def secrets_keep(secure: bool):
     if secure:
         pass
     else:
