@@ -15,6 +15,10 @@ class Token(BaseModel):
     created: DateTime
     expiry: Optional[DateTime] = None
 
+    @staticmethod
+    def make() -> Token:
+        raise NotImplementedError()
+
 
 class TokenHandler:
     @property
