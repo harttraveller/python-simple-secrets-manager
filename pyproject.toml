@@ -6,8 +6,8 @@ description = "A simple token manager."
 readme = "README.md"
 repository = "https://github.com/harttraveller/simple-token-manager"
 documentation = "https://harttraveller.com/posts/docs.simple-token-manager"
-authors = ["Hart Traveller <guider.adopt0l@icloud.com>", "Luke Moloney <NA>"]
-maintainers = ["Hart Traveller <guider.adopt0l@icloud.com>"]
+authors = ["Hart Traveller <ruling_fiction.0b@icloud.com>"]
+maintainers = ["Hart Traveller <ruling_fiction.0b@icloud.com>"]
 
 [tool.poetry.dependencies]
 python = ">3.9.7, <=3.12"
