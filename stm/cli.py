@@ -46,6 +46,7 @@ def tokens_names():
 @entry.command(name="view")
 @click.option(
     "--name",
+    "-n",
     type=str,
     help="Name of API token.",
     required=False,
