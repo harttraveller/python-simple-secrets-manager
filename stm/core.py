@@ -73,8 +73,8 @@ class TokenHandler:
     # def _search(self):
     #     pass
 
-    def reload(self, test: bool = False) -> None:
-        self.__data = self.__load_tokens() if not test else self.__load_test_tokens()
+    def reload(self) -> None:
+        self.__data = self.__load_tokens()
         self.obj = TokenAccessor(tokens_dict=self.__data)
 
     def erase(self, force: bool = False) -> None:
@@ -170,4 +170,5 @@ if __name__ == "__main__":
     token = Token.make(name="test", secret="fakesecret")
     vprint(token)
     vprint(token.model_dump())
+    tokens = TokenHandler()
     vprint(tokens.obj.A)
