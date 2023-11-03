@@ -2,6 +2,8 @@ import os
 from typing import Any
 from rich.console import Console
 
+# todo: move utils to separate package
+
 
 def vprint(obj: Any, verbose: bool = True) -> None:
     "verbose print utility with rich formatting"
