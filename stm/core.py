@@ -41,7 +41,8 @@ class Token(BaseModel):
 
 
 class TokenAccessor:
-    pass
+    def __init__(self, token_data: dict) -> None:
+        pass
 
 
 class TokenHandler:
@@ -50,7 +51,7 @@ class TokenHandler:
 
     def reload(self) -> None:
         self.__data = open_toml(PATH_TOKENS_DEFAULT)
-        # self.tokens
+        self.obj = TokenAccessor(token_data=self.__data)
 
     def erase(self, force: bool = False) -> None:
         "erase all tokens"
