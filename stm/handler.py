@@ -5,6 +5,12 @@ from stm.environment import PATH_TOKENS_DEFAULT
 class TokenHandler:
     @property
     def data(self) -> dict[str, str]:
+        """
+        Show token dictionary.
+
+        Returns:
+            dict[str, str]: [token name]:[token secret] dictionary
+        """
         return open_toml(PATH_TOKENS_DEFAULT)
 
     @property
