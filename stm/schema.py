@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from typing import Any
-from pydantic import BaseModel, create_model
-from typing import Any
+import pendulum
 from pendulum.datetime import DateTime
+from datetime import datetime
+from typing import Any, Union
+from pydantic import BaseModel
 
 
 # todo.maybe: submit pull request to pydantic with add feature
@@ -16,16 +17,23 @@ class PendulumDateTime(DateTime):
         yield cls.validate
 
     @classmethod
-    def validate(cls, v: Any) -> DateTime:
-        if isinstance(v, DateTime):
-            return v
-        if isinstance(v, str):
+    def validate(cls, v: Union[str, int, float, datetime, DateTime]) -> DateTime:
+        try:
             return cls.parse(v)
-        raise ValueError("not a valid datetime")
+        except ValueError:
+            raise ValueError("not a valid datetime")
 
     @classmethod
-    def parse(cls, v: str) -> PendulumDateTime:
-        raise NotImplemented
+    def parse(cls, v: Union[str, int, float, datetime, DateTime]) -> PendulumDateTime:
+        if isinstance(v, DateTime):
+            return v
+        if isinstance(v, int) or isinstance(v, float):
+            return pendulum.from_timestamp(v)
+        if isinstance(v, datetime):
+            return pendulum.from_timestamp(v.timestamp())
+        if isinstance(v, str):
+            return pendulum.parse(v)
+        raise ValueError("could not parse")
 
     @classmethod
     def __get_pydantic_core_schema__(cls, annotations: Any) -> dict:
