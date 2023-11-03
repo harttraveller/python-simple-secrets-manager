@@ -12,8 +12,8 @@ def entry():
     ...
 
 
-@entry.command(name="list")
-def tokens_list():
+@entry.command(name="names")
+def tokens_names():
     pass
 
 
