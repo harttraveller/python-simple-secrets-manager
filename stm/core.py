@@ -136,7 +136,7 @@ class TokenHandler:
         if not self.exists(name):
             raise ValueError("token does not exist")
 
-    def get(self, name: str) -> str:
+    def secret(self, name: str) -> str:
         """
         Get a token secret.
 
@@ -186,4 +186,5 @@ if __name__ == "__main__":
     tokens.erase(force=True)
     tokens.save(name="test", secret="asdf")
     vprint(dict(tokens))
+    vprint(tokens.secret("test"))
     # vprint(tokens.obj.A)
