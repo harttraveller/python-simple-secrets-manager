@@ -9,7 +9,7 @@ from stm.env import PATH_TOKENS_DEFAULT
 class Token(BaseModel):
     name: str
     secret: str
-    expiry: DateTime
+    expiry: Optional[DateTime] = None
 
 
 class TokenHandler:
