@@ -3,7 +3,7 @@ from rich.table import Table
 from pick import pick
 from loguru import logger as log
 from typing import Optional
-from ssm.core import tokens, TokenHandler
+from ssm.core import tokens, SecretHandler
 from ssm.sep.term import vprint
 from ssm.sep.system import to_clipboard
 from ssm.env import PKG_VERSION
@@ -23,7 +23,7 @@ def partial_hide_secret(secret: str):
     return f"{secret[:quarter_secret]}{hidden}"
 
 
-def display_token_table(tokens: TokenHandler):
+def display_token_table(tokens: SecretHandler):
     table = Table(title="Simple Token Manager: Saved Tokens", min_width=80)
     table.add_column("Name", justify="left", style="cyan", no_wrap=True)
     table.add_column("Secret", justify="left", style="magenta", no_wrap=True)

@@ -7,7 +7,7 @@ from ssm import setup
 from ssm.sep.io import open_toml, save_toml
 from ssm.sep.term import vprint
 from ssm.schema import PendulumDatetime
-from ssm.env import PATH_TOKENS_DEFAULT
+from ssm.env import PATH_SECRETS_DEFAULT
 
 # todo: imports for later use
 # from datetime import datetime
@@ -17,9 +17,9 @@ from ssm.env import PATH_TOKENS_DEFAULT
 
 
 # @dataclass
-class Token(BaseModel):
+class Secret(BaseModel):
     name: str
-    secret: str
+    key: str
     created: PendulumDatetime = pendulum.now()
     # delete_after # todo, delete after period
     # valid: Optional[bool] = None # known == unknown, True, validated, False, auto val failed
@@ -35,37 +35,32 @@ class Token(BaseModel):
     # todo: can add validation, params/features later when needed
     # validate: bool, expiry: Union[datetime, DateTime],
     @staticmethod
-    def make(
+    def keep(
         name: str,
-        secret: str,
-    ) -> Token:
-        return Token(name=name, secret=secret)
+        key: str,
+    ) -> Secret:
+        return Secret(name=name, key=key)
 
 
-class TokenAccessor:
-    def __init__(self, tokens_dict: dict[dict]) -> None:
-        self.__attach(tokens_dict)
+class SecretAccessor:
+    def __init__(self, secrets_dict: dict[dict]) -> None:
+        self.__attach(secrets_dict)
 
-    def __attach(self, tokens_dict: dict[dict]) -> None:
-        for token_name in tokens_dict.keys():
-            temp: dict = tokens_dict[token_name]
-            temp["name"] = token_name
-            setattr(self, token_name, Token.make(**temp))
+    def __attach(self, secrets_dict: dict[dict]) -> None:
+        for secret_name in secrets_dict.keys():
+            temp: dict = secrets_dict[secret_name]
+            temp["name"] = secret_name
+            setattr(self, secret_name, Secret.keep(**temp))
 
 
-class TokenHandler:
+class SecretHandler:
     def __init__(self) -> None:
-        setup.token_storage()
+        setup.secret_storage()
         self.reload()
 
     @staticmethod
-    def __load_tokens() -> dict[dict]:
-        return open_toml(PATH_TOKENS_DEFAULT)
-
-    # * temp test
-    @staticmethod
-    def __load_test_tokens() -> dict[dict]:
-        return {"A": {"secret": "1234"}, "B": {"secret": "2345"}}
+    def __load_secrets() -> dict[dict]:
+        return open_toml(PATH_SECRETS_DEFAULT)
 
     # todo
     # def _count(self):
@@ -76,16 +71,16 @@ class TokenHandler:
     #     pass
 
     def reload(self) -> None:
-        self.__data = self.__load_tokens()
-        # self.obj = TokenAccessor(tokens_dict=self.__data)
+        self.__data = self.__load_secrets()
+        self.obj = SecretAccessor(secrets_dict=self.__data)
 
     def erase(self, force: bool = False) -> None:
-        "erase all tokens"
+        "erase all secrets"
         if not force:
             raise ValueError(
-                "to avoid accidentally erasing your tokens, you must pass True to 'force'"
+                "to avoid accidentally erasing your secrets, you must pass True to 'force'"
             )
-        setup.token_storage(erase=True)
+        setup.secret_storage(erase=True)
 
     def __iter__(self) -> dict:
         for token_name, token_data in self.data.items():
@@ -157,11 +152,11 @@ class TokenHandler:
             name (str): name of new token
             secret (str): token secret
         """
-        token = Token.make(name=name, secret=secret).model_dump()
+        token = Secret.keep(name=name, key=secret).model_dump()
         del token["name"]
         self.reload()
         self.__data[name] = token
-        save_toml(self.__data, PATH_TOKENS_DEFAULT)
+        save_toml(self.__data, PATH_SECRETS_DEFAULT)
 
     def delete(self, name: str) -> None:
         """
@@ -173,18 +168,18 @@ class TokenHandler:
         self.check(name)
         creds = self.data
         del creds[name]
-        save_toml(creds, PATH_TOKENS_DEFAULT)
+        save_toml(creds, PATH_SECRETS_DEFAULT)
 
 
-tokens = TokenHandler()
+secrets = SecretHandler()
 
 if __name__ == "__main__":
     # token = Token.make(name="test", secret="fakesecret")
     # vprint(token)
     # vprint(token.model_dump())
-    tokens = TokenHandler()
-    tokens.erase(force=True)
-    tokens.save(name="test", secret="asdf")
-    vprint(dict(tokens))
-    vprint(tokens.secret("test"))
-    # vprint(tokens.obj.A)
+    secrets = SecretHandler()
+    secrets.erase(force=True)
+    secrets.save(name="test", secret="asdf")
+    vprint(dict(secrets))
+    vprint(secrets.secret("test"))
+    # vprint(secrets.obj.A)

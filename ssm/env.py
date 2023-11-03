@@ -5,4 +5,4 @@ PKG_VERSION = metadata.version("simple-secrets-manager")
 
 
 PATH_STORE_DEFAULT = Path.home() / ".ssm"
-PATH_TOKENS_DEFAULT = PATH_STORE_DEFAULT / "tokens.toml"
+PATH_SECRETS_DEFAULT = PATH_STORE_DEFAULT / "tokens.toml"
