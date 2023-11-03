@@ -1,3 +1,7 @@
+# simple-token-manager
+
+## todos
+
 - token rotatation period
 - token expiration period
 - add token to environment variables
@@ -5,3 +9,4 @@
     - permanent (.bash_profile, .zshrc, etc)
 - tokens stale
 - implement known tokens automatic testing
+-
