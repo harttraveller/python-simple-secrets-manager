@@ -1,10 +1,11 @@
-from stm.environment import PATH_STORE_DEFAULT
+from stm.io import open_toml, save_toml
+from stm.environment import PATH_TOKENS_DEFAULT
 
 
 class TokenHandler:
     @property
     def data(self) -> dict:
-        return open_toml(FILE_CREDENTIALS)
+        return open_toml(PATH_TOKENS_DEFAULT)
 
     @property
     def tokens(self) -> list[str]:
@@ -24,13 +25,13 @@ class TokenHandler:
     def save(self, name: str, key: str) -> None:
         creds = self.data
         creds[name] = key
-        save_toml(creds, FILE_CREDENTIALS)
+        save_toml(creds, PATH_TOKENS_DEFAULT)
 
     def delete(self, name: str) -> None:
         self.check(name)
         creds = self.data
         del creds[name]
-        save_toml(creds, FILE_CREDENTIALS)
+        save_toml(creds, PATH_TOKENS_DEFAULT)
 
 
 tokens = TokenHandler()
