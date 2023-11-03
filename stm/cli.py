@@ -1,4 +1,5 @@
 import rich_click as click
+from pick import pick
 from stm.handler import tokens
 from stm.environment import PKG_VERSION
 
