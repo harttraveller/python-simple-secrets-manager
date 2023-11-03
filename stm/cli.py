@@ -9,3 +9,28 @@ from stm.environment import PKG_VERSION
 def entry():
     # todo: cli message
     ...
+
+
+@entry.command(name="list")
+def tokens_list():
+    pass
+
+
+@entry.command(name="view")
+def tokens_view():
+    pass
+
+
+@entry.command(name="copy")
+def tokens_copy():
+    pass
+
+
+@entry.command(name="save")
+def tokens_save():
+    pass
+
+
+@entry.command(name="del")
+def tokens_delete():
+    pass
