@@ -21,6 +21,9 @@ class Token:
     # todo: can add expiry, other features etc later when actually needed
     # expiry: Optional[DateTime] = None
 
+    # def __post_init__(self) -> None:
+    #     self.is_known: bool = False # todo: check if known service for auto validation later
+
     def __str__(self):
         return f"Token(name={self.name})"
 
