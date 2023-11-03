@@ -11,6 +11,9 @@ maintainers = ["Hart Traveller <guider.adopt0l@icloud.com>"]
 
 [tool.poetry.dependencies]
 python = ">3.9.7, <=3.12"
+click = "^8.1.7"
+rich-click = "^1.7.1"
+rich = "^13.6.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
