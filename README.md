@@ -4,3 +4,4 @@
     - temporary in memory for program
     - permanent (.bash_profile, .zshrc, etc)
 - tokens stale
+- implement known tokens automatic testing
