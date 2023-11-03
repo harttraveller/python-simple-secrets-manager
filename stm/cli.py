@@ -8,6 +8,13 @@ from stm.sep.term import vprint
 from stm.env import PKG_VERSION
 
 
+def warn(msg: str, crit: bool = False) -> None:
+    if crit:
+        log.critical(msg)
+    else:
+        vprint(msg, color="red")
+
+
 def partial_hide_secret(secret: str):
     quarter_secret = int(len(secret) / 4)
     third_secret = len(secret) - quarter_secret
@@ -95,7 +102,7 @@ def tokens_save(secure: bool):
     if secure:
         pass
     else:
-        log.critical(
+        warn(
             "Passing a token as an argument will leave it in your terminal history, and is not recommended."
         )
 
