@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "simple-token-manager"
+packages = [{ include = "stm" }]
+version = "0.1.0"
+description = "A simple token manager."
+readme = "README.md"
+repository = "https://github.com/harttraveller/simple-token-manager"
+documentation = "https://harttraveller.com/posts/docs.simple-token-manager"
+authors = ["Hart Traveller <guider.adopt0l@icloud.com>", "Luke Moloney <NA>"]
+maintainers = ["Hart Traveller <guider.adopt0l@icloud.com>"]
+
+[tool.poetry.dependencies]
+python = ">3.9.7, <=3.12"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+stm = "stm.cli:stm"
+
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
