@@ -1,4 +1,0 @@
-# Simple Secrets Manager
-
-Description...
-
