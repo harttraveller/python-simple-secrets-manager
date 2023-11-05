@@ -161,7 +161,7 @@ class SecretHandler:
 
     def get(self, uid: str) -> str:
         """
-        Get a secret secret.
+        Get a secret key.
 
         Args:
             uid (str): uid of stored secret
