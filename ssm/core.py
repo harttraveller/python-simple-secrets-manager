@@ -3,6 +3,7 @@ from __future__ import annotations
 import pendulum
 
 from pydantic import BaseModel, field_validator
+from typing import Optional
 from ssm import setup
 from ssm.sep.io import open_toml, save_toml
 from ssm.sep.term import vprint
@@ -20,7 +21,7 @@ from ssm.env import PATH_SECRETS_DEFAULT
 class Secret(BaseModel):
     name: str
     key: str
-    created: PendulumDatetime = pendulum.now()
+    created: Optional[PendulumDatetime] = pendulum.now()
     # service # todo
     # user # todo
     # scope # todo
