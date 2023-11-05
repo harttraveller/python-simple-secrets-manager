@@ -153,7 +153,7 @@ class SecretHandler:
         self.check(name)
         return self.data[name]["secret"]
 
-    def add(self, name: str, secret: str) -> None:
+    def add(self, name: str, key: str) -> None:
         """
         Save a new token.
 
@@ -161,7 +161,7 @@ class SecretHandler:
             name (str): name of new token
             secret (str): token secret
         """
-        token = Secret.make(name=name, key=secret).model_dump()
+        token = Secret.make(name=name, key=key).model_dump()
         del token["name"]
         self.reload()
         self.__data[name] = token
