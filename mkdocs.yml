@@ -12,6 +12,9 @@ nav:
 - Reference:
   - reference/cli.md
   - reference/package.md
+- Background:
+  - background/design.md
+  - background/security.md
 
 theme:
   name: material
