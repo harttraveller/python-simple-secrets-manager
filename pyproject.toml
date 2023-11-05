@@ -10,7 +10,7 @@ authors = ["Hart Traveller <ruling_fiction.0b@icloud.com>"]
 maintainers = ["Hart Traveller <ruling_fiction.0b@icloud.com>"]
 
 [tool.poetry.dependencies]
-python = ">3.9.7, <=3.12"
+python = ">3.9.7, <4.0"
 click = "^8.1.7"
 rich = "^13.6.0"
 rich-click = "^1.7.1"
@@ -23,6 +23,13 @@ loguru = "^0.7.2"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.3"
+
+
+[tool.poetry.group.docs.dependencies]
+mkdocs-material = "^9.4.8"
+mkdocs-jupyter = "^0.24.6"
+mkdocs-roamlinks-plugin = "^0.3.2"
+mkdocs-git-revision-date-localized-plugin = "^1.2.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
