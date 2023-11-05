@@ -109,6 +109,18 @@ def secrets_keep(
         # else, save secret
 
 
+@entry.command(name="list", help="List secrets in a table.")
+# @click.option("--sort")
+# @click.option("--filter") *regex
+def secrets_table():
+    if secrets.count():
+        display_token_table(secrets)
+        # for name in secrets.names:
+        #     vprint(name)
+    else:
+        vprint("You haven't saved any secrets yet...", color="yellow")
+
+
 # todo: command.security - review revolving, checks
 # todo: command.peek
 # todo: keep
@@ -117,18 +129,6 @@ def secrets_keep(
 # @entry.command(name="wizard", help="Secrets CLI wizard.")
 # def secrets_wizard():
 #     pass
-
-
-# @entry.command(name="list", help="List secrets in a table.")
-# # @click.option("--sort")
-# # @click.option("--filter") *regex
-# def secrets_table():
-#     if secrets.count():
-#         display_token_table(secrets)
-#         # for name in secrets.names:
-#         #     vprint(name)
-#     else:
-#         vprint("You haven't saved any secrets yet...", color="yellow")
 
 
 # @entry.command(name="find", help="View the names of the saved secrets.")
