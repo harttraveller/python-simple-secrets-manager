@@ -38,12 +38,12 @@ class Secret(BaseModel):
 
     # todo: can add validation, params/features later when needed
     # validate: bool, expiry: Union[datetime, DateTime],
-    @staticmethod
-    def make(
-        name: str,
-        key: str,
-    ) -> Secret:
-        return Secret(name=name, key=key)
+    # @staticmethod
+    # def make(
+    #     name: str,
+    #     key: str,
+    # ) -> Secret:
+    #     return Secret(name=name, key=key)
 
     # age, measure in hours, days, weeks, etc
     def age(self, measure):
@@ -61,7 +61,7 @@ class SecretAccessor:
         for secret_name in secrets_dict.keys():
             temp: dict = secrets_dict[secret_name]
             temp["name"] = secret_name
-            setattr(self, secret_name, Secret.make(**temp))
+            setattr(self, secret_name, Secret.model_validate(temp))
 
 
 class SecretHandler:
@@ -162,7 +162,8 @@ class SecretHandler:
             name (str): name of new token
             secret (str): token secret
         """
-        token = Secret.make(name=name, key=key).model_dump()
+        secret_dict = {"name": name, "key": key}
+        token = Secret.model_validate(secret_dict).model_dump()
         del token["name"]
         self.reload()
         self.__data[name] = token
