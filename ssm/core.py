@@ -46,6 +46,9 @@ class Secret(BaseModel):
     # def __post_init__(self) -> None:
     #     self.is_known: bool = False # todo: check if known service for auto validation later
 
+    def __repr__(self):
+        return f"Secret(uid={self.uid})"
+
     def __str__(self):
         return f"Secret(uid={self.uid})"
 
