@@ -1,2 +1,2 @@
-# simple-token-manager
+# python-simple-secrets-manager
 

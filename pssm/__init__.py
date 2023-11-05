@@ -1,1 +1,1 @@
-from ssm.core import secrets
+from pssm.core import secrets

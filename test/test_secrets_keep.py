@@ -1,7 +1,7 @@
 from click.testing import CliRunner
 
-from ssm import secrets
-from ssm.cli import entry
+from pssm import secrets
+from pssm.cli import entry
 
 
 def test_lib_keep():

@@ -1,6 +1,6 @@
 import os
-from ssm.sep.io import save_toml
-from ssm.env import PATH_STORE_DEFAULT, PATH_SECRETS_DEFAULT
+from pssm.sep.io import save_toml
+from pssm.env import PATH_STORE_DEFAULT, PATH_SECRETS_DEFAULT
 
 
 def secret_storage(erase: bool = False):

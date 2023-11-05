@@ -5,10 +5,10 @@ from datetime import datetime
 
 from pydantic import BaseModel, field_validator
 from typing import Optional
-from ssm import setup
-from ssm.sep.io import open_toml, save_toml
-from ssm.sep.term import vprint
-from ssm.env import PATH_SECRETS_DEFAULT
+from pssm import setup
+from pssm.sep.io import open_toml, save_toml
+from pssm.sep.term import vprint
+from pssm.env import PATH_SECRETS_DEFAULT
 
 # todo: imports for later use
 # from datetime import datetime
