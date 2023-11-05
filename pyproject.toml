@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "simple-secrets-manager"
-packages = [{ include = "ssm" }]
+name = "python-simple-secrets-manager"
+packages = [{ include = "pssm" }]
 version = "0.1.0"
-description = "A simple secrets manager."
+description = "A simple python based secrets manager."
 readme = "README.md"
-repository = "https://github.com/harttraveller/simple-secrets-manager"
-documentation = "https://harttraveller.com/posts/docs.simple-secrets-manager"
+repository = "https://github.com/harttraveller/python-simple-secrets-manager"
+documentation = "https://harttraveller.com/python-simple-secrets-manager"
 authors = ["Hart Traveller <ruling_fiction.0b@icloud.com>"]
 maintainers = ["Hart Traveller <ruling_fiction.0b@icloud.com>"]
 
