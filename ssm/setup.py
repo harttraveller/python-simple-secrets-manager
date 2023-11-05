@@ -5,7 +5,6 @@ from ssm.env import PATH_STORE_DEFAULT, PATH_SECRETS_DEFAULT
 
 def secret_storage(erase: bool = False):
     PATH_STORE_DEFAULT.mkdir(exist_ok=True)
-
     if erase:
         if PATH_SECRETS_DEFAULT.exists():
             os.remove(PATH_SECRETS_DEFAULT)
