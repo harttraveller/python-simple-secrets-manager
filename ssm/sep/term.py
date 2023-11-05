@@ -9,13 +9,24 @@ from rich.color import ANSI_COLOR_NAMES
 def vprint(
     obj: Union[str, Any],
     color: Optional[str] = None,
-    prepend_newline: bool = True,
+    pn: bool = False,
     verbose: bool = True,
 ) -> None:
-    "verbose print utility with rich formatting"
+    """
+    verbose print utility with rich formatting
+
+    Args:
+        obj (Union[str, Any]): object to print
+        color (Optional[str], optional): color of string if string. Defaults to None.
+        pn (bool, optional): prepend newline if string. Defaults to False.
+        verbose (bool, optional): print object. Defaults to True.
+
+    Raises:
+        ValueError: invalid color
+    """
     if verbose:
         if isinstance(obj, str):
-            if prepend_newline:
+            if pn:
                 obj = f"\n{obj}"
             if color is None:
                 Console().print(obj)
