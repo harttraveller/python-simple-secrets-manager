@@ -6,7 +6,7 @@ from typing import Optional
 from ssm.core import secrets, SecretHandler
 from ssm.sep.term import vprint
 from ssm.sep.system import to_clipboard
-from ssm.env import PACKAGE_VERSION
+from ssm.env import PACKAGE_NAME, PACKAGE_VERSION
 
 
 def warn(msg: str, crit: bool = False) -> None:
@@ -33,7 +33,7 @@ def display_token_table(secrets: SecretHandler):
 
 
 @click.group(invoke_without_command=True)
-@click.version_option(PACKAGE_VERSION, prog_name="")
+@click.version_option(PACKAGE_VERSION, prog_name=PACKAGE_NAME)
 @click.pass_context
 def entry(ctx):
     # todo: cli message
