@@ -173,7 +173,7 @@ class SecretHandler:
 
         Args:
             uid (str): uid of new secret
-            secret (str): secret secret
+            key (str): secret key
         """
         secret_dict = {"uid": uid, "key": key}
         secret = Secret.model_validate(secret_dict).model_dump()
