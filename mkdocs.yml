@@ -5,10 +5,8 @@ edit_uri: edit/main/docs/
 
 nav:
 - index.md
-- setup.md
-- Tutorial:
-  - tutorial/cli.md
-  - tutorial/package.ipynb
+- quickstart.md
+- Tutorial: tutorial.ipynb
 - Reference:
   - reference/cli.md
   - reference/package.md
