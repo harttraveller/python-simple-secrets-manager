@@ -41,6 +41,26 @@ def entry(ctx):
         ctx.invoke(secrets_wizard)
 
 
+# todo: add secure input mode
+@entry.command(name="keep", help="Keep (ie: save) a new secret.")
+@click.option(
+    "--secure/--unsafe",
+    "-s/-u",
+    type=bool,
+    default=True,
+    required=True,
+    help="Secure input (interactive) mode, requires terminal access.",
+)
+# todo: overwrite option
+def secrets_keep(secure: bool):
+    if secure:
+        pass
+    else:
+        warn(
+            "Passing a token as an argument will leave it in your terminal history, and is not recommended."
+        )
+
+
 # todo: command.security - review revolving, checks
 # todo: command.peek
 # todo: keep
@@ -108,26 +128,6 @@ def secrets_copy():
 @entry.command(name="edit", help="Edit an existing secret.")
 def secrets_edit():
     pass
-
-
-# todo: add secure input mode
-@entry.command(name="keep", help="Keep (ie: save) a new secret.")
-@click.option(
-    "--secure/--unsafe",
-    "-s/-u",
-    type=bool,
-    default=True,
-    required=True,
-    help="Secure input (interactive) mode, requires terminal access.",
-)
-# todo: overwrite option
-def secrets_keep(secure: bool):
-    if secure:
-        pass
-    else:
-        warn(
-            "Passing a token as an argument will leave it in your terminal history, and is not recommended."
-        )
 
 
 @entry.command(name="forget", help="Forget (ie: delete) a secret.")
