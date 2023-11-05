@@ -1,6 +1,7 @@
 import rich_click as click
 from rich.table import Table
 from pick import pick
+from getpass import getpass
 from loguru import logger as log
 from typing import Optional
 from ssm.core import secrets, SecretHandler
@@ -80,14 +81,30 @@ def secrets_keep(
 ):
     # todo: implement overwrite block if necessary
     if secure:
-        pass
-        # ask for name
-        # if name exists and not overwrite, block
-        # else continue, overwrite
+        secret_uid = str(input("uid ❯ "))
+        secret_key = getpass("key ❯ ")
+        try:
+            secrets.keep(uid=secret_uid, key=secret_key)
+            vprint("SUCCESS: secret saved", color="light_green")
+        except ValueError as exc:
+            vprint(str(exc), pn=True, color="red")
     else:
-        warn(
-            "passing a token as an argument will leave it in your terminal history - it is not recommended"
-        )
+        if name is None:
+            vprint("ERROR: secret name (-n) must be passed", color="red", pn=True)
+        elif key is None:
+            vprint("ERROR: secret key (-k) must be passed", color="red", pn=True)
+        else:
+            vprint(
+                "WARNING: using -ns (not secure) leaves keys in your terminal history - it is not recommended",
+                color="yellow",
+                pn=True,
+            )
+            try:
+                secrets.keep(uid=name, key=key)
+                vprint("SUCCESS: secret saved", color="light_green")
+            except ValueError as exc:
+                vprint(str(exc), pn=True, color="red")
+
         # if name exists and not overwrite, block
         # else, save secret
 

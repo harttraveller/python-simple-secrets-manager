@@ -5,7 +5,7 @@ from ssm.cli import entry
 
 
 def test_lib_keep():
-    secrets.keep(name="test-secret", key="test-key")
+    secrets.keep(uid="test-secret", key="test-key")
 
 
 def test_cli_keep():

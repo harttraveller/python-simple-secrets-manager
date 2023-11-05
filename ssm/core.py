@@ -19,7 +19,7 @@ from ssm.env import PATH_SECRETS_DEFAULT
 
 # @dataclass
 class Secret(BaseModel):
-    name: str
+    uid: str
     key: str
     created: Optional[PendulumDatetime] = pendulum.now()
     # service # todo
@@ -30,33 +30,33 @@ class Secret(BaseModel):
     # todo: can add expiry, other features etc later when actually needed
     # expiry: Optional[DateTime] = None
 
-    @field_validator("name")
-    def __validate_name(cls, name: str) -> str:
-        # secret name must be only alphanumeric and underscore, and cannot start with number
-        if not len(name):
-            raise ValueError("the secret name must be at least one character long")
-        if name[0].isnumeric():
-            raise ValueError("the secret name cannot start with a number")
-        if not all([i.isalnum() or i == "_" for i in name]):
+    @field_validator("uid")
+    def __validate_uid(cls, uid: str) -> str:
+        # secret uid must be only alphanumeric and underscore, and cannot start with number
+        if not len(uid):
+            raise ValueError("the secret uid must be at least one character long")
+        if uid[0].isnumeric():
+            raise ValueError("the secret uid cannot start with a number")
+        if not all([i.isalnum() or i == "_" for i in uid]):
             raise ValueError(
-                "the secret name can only contain alphanumeric and underscore chars"
+                "the secret uid can only contain alphanumeric and underscore chars"
             )
-        return name
+        return uid
 
     # def __post_init__(self) -> None:
     #     self.is_known: bool = False # todo: check if known service for auto validation later
 
     def __str__(self):
-        return f"Token(name={self.name})"
+        return f"Secret(uid={self.uid})"
 
     # todo: can add validation, params/features later when needed
     # validate: bool, expiry: Union[datetime, DateTime],
     # @staticmethod
     # def make(
-    #     name: str,
+    #     uid: str,
     #     key: str,
     # ) -> Secret:
-    #     return Secret(name=name, key=key)
+    #     return Secret(uid=uid, key=key)
 
     # age, measure in hours, days, weeks, etc
     def age(self, measure):
@@ -71,10 +71,10 @@ class SecretAccessor:
         self.__attach(secrets_dict)
 
     def __attach(self, secrets_dict: dict[dict]) -> None:
-        for secret_name in secrets_dict.keys():
-            temp: dict = secrets_dict[secret_name]
-            temp["name"] = secret_name
-            setattr(self, secret_name, Secret.model_validate(temp))
+        for secret_uid in secrets_dict.keys():
+            temp: dict = secrets_dict[secret_uid]
+            temp["uid"] = secret_uid
+            setattr(self, secret_uid, Secret.model_validate(temp))
 
 
 class SecretHandler:
@@ -106,92 +106,92 @@ class SecretHandler:
         setup.secret_storage(erase=True)
 
     def __iter__(self) -> dict:
-        for token_name, token_data in self.data.items():
-            yield token_name, token_data
+        for secret_uid, secret_key in self.data.items():
+            yield secret_uid, secret_key
 
     @property
     def data(self) -> dict:
         """
-        Show token dictionary.
+        Show secret dictionary.
 
         Returns:
-            dict[str, str]: [token name]:[token secret] dictionary
+            dict[str, str]: [secret uid]:[secret key] dictionary
         """
         return self.__data
 
     @property
-    def names(self) -> list[str]:
+    def uids(self) -> list[str]:
         """
-        Return token names.
+        Return secret uids.
 
         Returns:
-            list[str]: list of stored token names
+            list[str]: list of stored secret uids
         """
         return list(self.data.keys())
 
-    def exists(self, name: str) -> bool:
+    def exists(self, uid: str) -> bool:
         """
-        Check if token name exists.
+        Check if secret uid exists.
 
         Args:
-            name (str): name of stored token
+            uid (str): uid of stored secret
 
         Returns:
             bool: True if exists, else False
         """
-        return name in self.names
+        return uid in self.uids
 
-    def check(self, name: str) -> None:
+    def check(self, uid: str) -> None:
         """
-        Check if token name exists, raises ValueError if False.
+        Check if secret uid exists, raises ValueError if False.
 
         Args:
-            name (str): name of stored token
+            uid (str): uid of stored secret
 
         Raises:
-            ValueError: no available token
+            ValueError: no available secret
         """
-        if not self.exists(name):
-            raise ValueError("token does not exist")
+        if not self.exists(uid):
+            raise ValueError("secret does not exist")
 
-    def secret(self, name: str) -> str:
+    def secret(self, uid: str) -> str:
         """
-        Get a token secret.
+        Get a secret secret.
 
         Args:
-            name (str): name of stored token
+            uid (str): uid of stored secret
 
         Returns:
-            str: token secret
+            str: secret secret
         """
-        self.check(name)
-        return self.data[name]["secret"]
+        self.check(uid)
+        return self.data[uid]["secret"]
 
-    def keep(self, name: str, key: str) -> None:
+    def keep(self, uid: str, key: str) -> None:
         """
-        Save a new token.
+        Save a new secret.
 
         Args:
-            name (str): name of new token
-            secret (str): token secret
+            uid (str): uid of new secret
+            secret (str): secret secret
         """
-        secret_dict = {"name": name, "key": key}
-        token = Secret.model_validate(secret_dict).model_dump()
-        del token["name"]
+        secret_dict = {"uid": uid, "key": key}
+        secret = Secret.model_validate(secret_dict).model_dump()
+        del secret["uid"]
         self.reload()
-        self.__data[name] = token
+        self.__data[uid] = secret
         save_toml(self.__data, PATH_SECRETS_DEFAULT)
 
-    def delete(self, name: str) -> None:
+    def delete(self, uid: str) -> None:
         """
-        Delete existing token.
+        Delete existing secret.
 
         Args:
-            name (str): name of stoed token
+            uid (str): uid of stored secret
         """
-        self.check(name)
+        self.check(uid)
         creds = self.data
-        del creds[name]
+        del creds[uid]
         save_toml(creds, PATH_SECRETS_DEFAULT)
 
 
