@@ -37,8 +37,9 @@ def display_token_table(secrets: SecretHandler):
 @click.pass_context
 def entry(ctx):
     # todo: cli message
-    if ctx.invoked_subcommand is None:
-        ctx.invoke(secrets_wizard)
+    pass
+    # if ctx.invoked_subcommand is None:
+    #     ctx.invoke(secrets_wizard)
 
 
 # todo: add secure input mode
