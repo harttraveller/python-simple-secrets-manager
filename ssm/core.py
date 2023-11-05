@@ -156,7 +156,7 @@ class SecretHandler:
         if not self.exists(uid):
             raise ValueError("secret does not exist")
 
-    def secret(self, uid: str) -> str:
+    def key(self, uid: str) -> str:
         """
         Get a secret secret.
 
