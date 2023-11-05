@@ -84,7 +84,7 @@ def secrets_keep(
         # else continue, overwrite
     else:
         warn(
-            "Passing a token as an argument will leave it in your terminal history, and is not recommended."
+            "passing a token as an argument will leave it in your terminal history - it is not recommended"
         )
         # if name exists and not overwrite, block
         # else, save secret
