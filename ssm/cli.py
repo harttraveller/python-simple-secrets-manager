@@ -112,7 +112,7 @@ def secrets_keep(
 @entry.command(name="list", help="List secrets in a table.")
 # @click.option("--sort")
 # @click.option("--filter") *regex
-def secrets_table():
+def secrets_list():
     if secrets.count():
         display_token_table(secrets)
         # for name in secrets.names:
