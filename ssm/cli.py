@@ -121,6 +121,14 @@ def secrets_list():
         vprint("You haven't saved any secrets yet...", color="yellow")
 
 
+@entry.command(name="forget", help="Forget (ie: delete) a secret.")
+def secrets_forget():
+    # api_token = secrets.get(selection[0])
+    # subprocess.run("pbcopy", text=True, input=api_token)
+    # vprint(f"[green]{selection[0].title()} Token Copied[/green]")
+    ...
+
+
 # todo: command.security - review revolving, checks
 # todo: command.peek
 # todo: keep
@@ -176,14 +184,6 @@ def secrets_list():
 # @entry.command(name="edit", help="Edit an existing secret.")
 # def secrets_edit():
 #     pass
-
-
-# @entry.command(name="forget", help="Forget (ie: delete) a secret.")
-# def secrets_forget():
-#     # api_token = secrets.get(selection[0])
-#     # subprocess.run("pbcopy", text=True, input=api_token)
-#     # vprint(f"[green]{selection[0].title()} Token Copied[/green]")
-#     ...
 
 
 # # @entry.command(name="config", help="Configuration.")
