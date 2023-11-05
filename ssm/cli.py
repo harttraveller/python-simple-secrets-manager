@@ -96,76 +96,76 @@ def secrets_keep(
 # todo: keep
 
 
-@entry.command(name="wizard", help="Secrets CLI wizard.")
-def secrets_wizard():
-    pass
+# @entry.command(name="wizard", help="Secrets CLI wizard.")
+# def secrets_wizard():
+#     pass
 
 
-@entry.command(name="list", help="List secrets in a table.")
-# @click.option("--sort")
-# @click.option("--filter") *regex
-def secrets_table():
-    if secrets.count():
-        display_token_table(secrets)
-        # for name in secrets.names:
-        #     vprint(name)
-    else:
-        vprint("You haven't saved any secrets yet...", color="yellow")
+# @entry.command(name="list", help="List secrets in a table.")
+# # @click.option("--sort")
+# # @click.option("--filter") *regex
+# def secrets_table():
+#     if secrets.count():
+#         display_token_table(secrets)
+#         # for name in secrets.names:
+#         #     vprint(name)
+#     else:
+#         vprint("You haven't saved any secrets yet...", color="yellow")
 
 
-@entry.command(name="find", help="View the names of the saved secrets.")
-def secrets_find():
-    pass
+# @entry.command(name="find", help="View the names of the saved secrets.")
+# def secrets_find():
+#     pass
 
 
-@entry.command(name="view", help="View a secret for a token.")
-@click.option(
-    "--interactive/--arguments",
-    "-i/-a",
-    type=bool,
-    default=False,
-    required=True,
-)
-@click.option(
-    "--name",
-    "-n",
-    type=str,
-    default=None,
-    help="Name of API token.",
-    required=True,
-)
-def secrets_view(interactive: bool, name: Optional[str]):
-    pass
-    # if (name is None) and (not interactive):
-    #     vprint(
-    #         "\nYou must enter a token name (-n) or use interactive mode (-i).",
-    #         color="red",
-    #     )
+# @entry.command(name="view", help="View a secret for a token.")
+# @click.option(
+#     "--interactive/--arguments",
+#     "-i/-a",
+#     type=bool,
+#     default=False,
+#     required=True,
+# )
+# @click.option(
+#     "--name",
+#     "-n",
+#     type=str,
+#     default=None,
+#     help="Name of API token.",
+#     required=True,
+# )
+# def secrets_view(interactive: bool, name: Optional[str]):
+#     pass
+#     # if (name is None) and (not interactive):
+#     #     vprint(
+#     #         "\nYou must enter a token name (-n) or use interactive mode (-i).",
+#     #         color="red",
+#     #     )
 
 
-@entry.command(name="copy", help="Copy a secret key to your clipboard.")
-@click.option(
-    "--interactive/--arguments",
-    "-i/-a",
-    type=bool,
-    default=False,
-    required=True,
-)
-def secrets_copy():
-    pass
+# @entry.command(name="copy", help="Copy a secret key to your clipboard.")
+# @click.option(
+#     "--interactive/--arguments",
+#     "-i/-a",
+#     type=bool,
+#     default=False,
+#     required=True,
+# )
+# def secrets_copy():
+#     pass
 
 
-@entry.command(name="edit", help="Edit an existing secret.")
-def secrets_edit():
-    pass
+# @entry.command(name="edit", help="Edit an existing secret.")
+# def secrets_edit():
+#     pass
 
 
-@entry.command(name="forget", help="Forget (ie: delete) a secret.")
-def secrets_forget():
-    # api_token = secrets.get(selection[0])
-    # subprocess.run("pbcopy", text=True, input=api_token)
-    # vprint(f"[green]{selection[0].title()} Token Copied[/green]")
-    ...
+# @entry.command(name="forget", help="Forget (ie: delete) a secret.")
+# def secrets_forget():
+#     # api_token = secrets.get(selection[0])
+#     # subprocess.run("pbcopy", text=True, input=api_token)
+#     # vprint(f"[green]{selection[0].title()} Token Copied[/green]")
+#     ...
 
 
-# @entry.command(name="config", help="Configuration.")
+# # @entry.command(name="config", help="Configuration.")
