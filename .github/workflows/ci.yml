@@ -21,6 +21,6 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - run: pip install poetry
-      - run: poetry config settings.virtualenvs.create false
+      - run: poetry config virtualenvs.create false
       - run: poetry install --with docs
       - run: mkdocs gh-deploy --force
