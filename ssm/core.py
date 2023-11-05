@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-import pendulum
+from copy import deepcopy
+from datetime import datetime
 
 from pydantic import BaseModel, field_validator
 from typing import Optional
 from ssm import setup
 from ssm.sep.io import open_toml, save_toml
 from ssm.sep.term import vprint
-from ssm.schema import PendulumDatetime
 from ssm.env import PATH_SECRETS_DEFAULT
 
 # todo: imports for later use
@@ -21,7 +21,7 @@ from ssm.env import PATH_SECRETS_DEFAULT
 class Secret(BaseModel):
     uid: str
     key: str
-    created: Optional[PendulumDatetime] = pendulum.now()
+    created: Optional[datetime] = datetime.now()
     # service # todo
     # user # todo
     # scope # todo
@@ -71,8 +71,10 @@ class SecretAccessor:
         self.__attach(secrets_dict)
 
     def __attach(self, secrets_dict: dict[dict]) -> None:
-        for secret_uid in secrets_dict.keys():
-            temp: dict = secrets_dict[secret_uid]
+        # deepcopy prevents mem error that adds uid back to original dict
+        secrets_dict_copy = deepcopy(secrets_dict)
+        for secret_uid in secrets_dict_copy.keys():
+            temp: dict = secrets_dict_copy[secret_uid]
             temp["uid"] = secret_uid
             setattr(self, secret_uid, Secret.model_validate(temp))
 
