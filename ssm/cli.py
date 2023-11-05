@@ -74,7 +74,9 @@ def entry(ctx):
     help="the secret key to save",
 )
 # todo: overwrite option
-def secrets_keep(secure: bool):
+def secrets_keep(
+    secure: bool, overwrite: bool, name: Optional[str] = None, key: Optional[str] = None
+):
     if secure:
         pass
     else:
