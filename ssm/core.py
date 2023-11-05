@@ -167,7 +167,7 @@ class SecretHandler:
             uid (str): uid of stored secret
 
         Returns:
-            str: secret secret
+            str: secret key
         """
         self.check(uid)
         return self.data[uid]["secret"]
