@@ -79,10 +79,15 @@ def secrets_keep(
 ):
     if secure:
         pass
+        # ask for name
+        # if name exists and not overwrite, block
+        # else continue, overwrite
     else:
         warn(
             "Passing a token as an argument will leave it in your terminal history, and is not recommended."
         )
+        # if name exists and not overwrite, block
+        # else, save secret
 
 
 # todo: command.security - review revolving, checks
