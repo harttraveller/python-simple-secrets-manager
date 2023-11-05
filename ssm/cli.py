@@ -25,9 +25,9 @@ def partial_hide_secret(secret: str):
 
 
 def display_token_table(secrets: SecretHandler):
-    table = Table(title="Simple Secret Manager Secrets", min_width=80)
+    table = Table(title="Secrets", min_width=80)
     table.add_column("Name", justify="left", style="cyan", no_wrap=True)
-    table.add_column("Secret", justify="left", style="magenta", no_wrap=True)
+    table.add_column("Key", justify="left", style="magenta", no_wrap=True)
     for secret_name, secret_data in secrets.data.items():
         table.add_row(secret_name, partial_hide_secret(secret_data["key"]))
     vprint(table)
