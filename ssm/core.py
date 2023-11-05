@@ -188,7 +188,7 @@ class SecretHandler:
         save_toml(self.__data, PATH_SECRETS_DEFAULT)
         self.reload()
 
-    def delete(self, uid: str) -> None:
+    def forget(self, uid: str) -> None:
         """
         Delete existing secret.
 
