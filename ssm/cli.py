@@ -44,12 +44,34 @@ def entry(ctx):
 # todo: add secure input mode
 @entry.command(name="keep", help="Keep (ie: save) a new secret.")
 @click.option(
-    "--secure/--unsafe",
-    "-s/-u",
+    "--secure/--no-secure",
+    "-s/-ns",
     type=bool,
     default=True,
     required=True,
-    help="Secure input (interactive) mode, requires terminal access.",
+    help="secure input (interactive) mode, requires terminal access",
+)
+@click.option(
+    "--overwrite/--no-overwrite",
+    "-o/-no",
+    type=bool,
+    default=False,
+    required=True,
+    help="if a secret with the same name exists, overwrite it",
+)
+@click.option(
+    "--name",
+    "-n",
+    type=str,
+    required=False,
+    help="the name of the secret to save",
+)
+@click.option(
+    "--key",
+    "-k",
+    type=str,
+    required=False,
+    help="the secret key to save",
 )
 # todo: overwrite option
 def secrets_keep(secure: bool):
