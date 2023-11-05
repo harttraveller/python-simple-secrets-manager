@@ -170,7 +170,7 @@ class SecretHandler:
             str: secret key
         """
         self.check(uid)
-        return self.data[uid]["secret"]
+        return self.data[uid]["key"]
 
     def keep(self, uid: str, key: str) -> None:
         """
