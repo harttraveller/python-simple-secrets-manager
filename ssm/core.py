@@ -30,6 +30,19 @@ class Secret(BaseModel):
     # todo: can add expiry, other features etc later when actually needed
     # expiry: Optional[DateTime] = None
 
+    @field_validator("name")
+    def __validate_name(cls, name: str) -> str:
+        # secret name must be only alphanumeric and underscore, and cannot start with number
+        if not len(name):
+            raise ValueError("the secret name must be at least one character long")
+        if name[0].isnumeric():
+            raise ValueError("the secret name cannot start with a number")
+        if not all([i.isalnum() or i == "_" for i in name]):
+            raise ValueError(
+                "the secret name can only contain alphanumeric and underscore chars"
+            )
+        return name
+
     # def __post_init__(self) -> None:
     #     self.is_known: bool = False # todo: check if known service for auto validation later
 
