@@ -24,7 +24,7 @@ def partial_hide_secret(secret: str):
     return f"{secret[:quarter_secret]}{hidden}"
 
 
-def display_token_table(secrets: SecretHandler):
+def display_secret_table(secrets: SecretHandler):
     table = Table(title="Secrets", min_width=80)
     table.add_column("Name", justify="left", style="cyan", no_wrap=True)
     table.add_column("Key", justify="left", style="magenta", no_wrap=True)
@@ -114,7 +114,7 @@ def secrets_keep(
 # @click.option("--filter") *regex
 def secrets_list():
     if secrets.count():
-        display_token_table(secrets)
+        display_secret_table(secrets)
         # for name in secrets.names:
         #     vprint(name)
     else:
