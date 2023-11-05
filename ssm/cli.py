@@ -28,8 +28,8 @@ def display_token_table(secrets: SecretHandler):
     table = Table(title="Simple Secret Manager Secrets", min_width=80)
     table.add_column("Name", justify="left", style="cyan", no_wrap=True)
     table.add_column("Secret", justify="left", style="magenta", no_wrap=True)
-    for token_name, token_data in secrets.data.items():
-        table.add_row(token_name, partial_hide_secret(token_data["secret"]))
+    for token_name, secret_key in secrets.data.items():
+        table.add_row(token_name, partial_hide_secret(secret_key))
     vprint(table)
 
 
