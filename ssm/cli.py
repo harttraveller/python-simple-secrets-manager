@@ -26,7 +26,7 @@ def partial_hide_secret(secret: str):
 
 def display_secret_table(secrets: SecretHandler):
     table = Table(title="Secrets", min_width=80)
-    table.add_column("Name", justify="left", style="cyan", no_wrap=True)
+    table.add_column("UID", justify="left", style="cyan", no_wrap=True)
     table.add_column("Key", justify="left", style="magenta", no_wrap=True)
     for secret_name, secret_data in secrets.data.items():
         table.add_row(secret_name, partial_hide_secret(secret_data["key"]))
@@ -62,11 +62,11 @@ def entry(ctx):
     help="if a secret with the same name exists, overwrite it",
 )
 @click.option(
-    "--name",
-    "-n",
+    "--uid",
+    "-u",
     type=str,
     required=False,
-    help="the name of the secret to save",
+    help="the uid of the secret to save",
 )
 @click.option(
     "--key",
@@ -77,7 +77,7 @@ def entry(ctx):
 )
 # todo: overwrite option
 def secrets_keep(
-    secure: bool, overwrite: bool, name: Optional[str] = None, key: Optional[str] = None
+    secure: bool, overwrite: bool, uid: Optional[str] = None, key: Optional[str] = None
 ):
     # todo: implement overwrite block if necessary
     if secure:
@@ -89,7 +89,7 @@ def secrets_keep(
         except ValueError as exc:
             vprint(str(exc), pn=True, color="red")
     else:
-        if name is None:
+        if uid is None:
             vprint("ERROR: secret name (-n) must be passed", color="red", pn=True)
         elif key is None:
             vprint("ERROR: secret key (-k) must be passed", color="red", pn=True)
@@ -100,7 +100,7 @@ def secrets_keep(
                 pn=True,
             )
             try:
-                secrets.keep(uid=name, key=key)
+                secrets.keep(uid=uid, key=key)
                 vprint("SUCCESS: secret saved", color="light_green")
             except ValueError as exc:
                 vprint(str(exc), pn=True, color="red")
@@ -122,7 +122,11 @@ def secrets_list():
 
 
 @entry.command(name="forget", help="Forget (ie: delete) a secret.")
-def secrets_forget():
+@click.option(
+    "--uid",
+    "-u",
+)
+def secrets_forget(uid: str):
     # api_token = secrets.get(selection[0])
     # subprocess.run("pbcopy", text=True, input=api_token)
     # vprint(f"[green]{selection[0].title()} Token Copied[/green]")
