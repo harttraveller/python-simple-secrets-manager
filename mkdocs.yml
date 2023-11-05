@@ -1,0 +1,30 @@
+site_name: Simple Secrets Manager
+repo_name: simple-secrets-manager
+repo_url: https://github.com/harttraveller/simple-secrets-manager
+edit_uri: edit/main/main/
+
+nav:
+- index.md
+
+theme:
+  name: material
+  favicon: icon.png
+  logo: icon.png
+  icon:
+    annotation: material/plus-circle
+  font:
+    text: Inter
+    code: Ubuntu Mono
+  palette:
+    scheme: slate
+    primary: black
+    accent: orange
+  features:
+  - content.action.view
+  - content.action.edit
+  - search.suggest
+  - content.code.copy
+  - content.code.annotate
+  - navigation.tracking
+  - navigation.tabs
+  - navigation.tabs.sticky
