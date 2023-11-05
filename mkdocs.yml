@@ -5,7 +5,7 @@ edit_uri: edit/main/main/
 
 nav:
 - index.md
-- quickstart.md
+- setup.md
 - Tutorial:
   - tutorial/cli.md
   - tutorial/package.ipynb
