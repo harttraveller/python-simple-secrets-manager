@@ -77,6 +77,7 @@ def entry(ctx):
 def secrets_keep(
     secure: bool, overwrite: bool, name: Optional[str] = None, key: Optional[str] = None
 ):
+    # todo: implement overwrite block if necessary
     if secure:
         pass
         # ask for name
