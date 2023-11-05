@@ -153,7 +153,7 @@ class SecretHandler:
         self.check(name)
         return self.data[name]["secret"]
 
-    def add(self, name: str, key: str) -> None:
+    def keep(self, name: str, key: str) -> None:
         """
         Save a new token.
 
