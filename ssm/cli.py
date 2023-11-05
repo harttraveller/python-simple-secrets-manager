@@ -46,12 +46,12 @@ def entry(ctx):
 # todo: add secure input mode
 @entry.command(name="keep", help="Keep (ie: save) a new secret.")
 @click.option(
-    "--secure/--no-secure",
-    "-s/-ns",
+    "--interactive/--arguments",
+    "-i/-a",
     type=bool,
     default=True,
     required=True,
-    help="secure input (interactive) mode, requires terminal access",
+    help="Interactive mode or arguments mode.",
 )
 @click.option(
     "--overwrite/--no-overwrite",
@@ -77,33 +77,39 @@ def entry(ctx):
 )
 # todo: overwrite option
 def secrets_keep(
-    secure: bool, overwrite: bool, uid: Optional[str] = None, key: Optional[str] = None
+    interactive: bool,
+    overwrite: bool,
+    uid: Optional[str] = None,
+    key: Optional[str] = None,
 ):
     # todo: implement overwrite block if necessary
-    if secure:
-        secret_uid = str(input("uid ❯ "))
-        secret_key = getpass("key ❯ ")
-        try:
-            secrets.keep(uid=secret_uid, key=secret_key)
-            vprint("SUCCESS: secret saved", color="light_green")
-        except ValueError as exc:
-            vprint(str(exc), pn=True, color="red")
+    remember_message = lambda: vprint("Secret remembered!", color="light_green")
+    if interactive:
+        if (uid is not None) or (key is not None):
+            vprint("Passing arguments is disabled in interactive mode.", color="yellow")
+        else:
+            secret_uid = str(input("uid ❯ "))
+            secret_key = getpass("key ❯ ")
+            try:
+                secrets.keep(uid=secret_uid, key=secret_key)
+                remember_message()
+            except ValueError as exc:
+                vprint(str(exc), color="red")
     else:
         if uid is None:
-            vprint("ERROR: secret name (-n) must be passed", color="red", pn=True)
+            vprint("Secret uid (-u) must be passed.", color="yellow")
         elif key is None:
-            vprint("ERROR: secret key (-k) must be passed", color="red", pn=True)
+            vprint("Secret key (-k) must be passed.", color="yellow")
         else:
             vprint(
-                "WARNING: using -ns (not secure) leaves keys in your terminal history - it is not recommended",
-                color="yellow",
-                pn=True,
+                "Using arguments mode leaves secret keys in your terminal history and accordingly it is not recommended.",
+                color="red",
             )
             try:
                 secrets.keep(uid=uid, key=key)
-                vprint("SUCCESS: secret saved", color="light_green")
+                remember_message()
             except ValueError as exc:
-                vprint(str(exc), pn=True, color="red")
+                vprint(str(exc), color="red")
 
         # if name exists and not overwrite, block
         # else, save secret
@@ -123,14 +129,44 @@ def secrets_list():
 
 @entry.command(name="forget", help="Forget (ie: delete) a secret.")
 @click.option(
+    "--interactive/--arguments",
+    "-i/-a",
+    type=bool,
+    default=True,
+    required=True,
+    help="Interactive mode or arguments.",
+)
+@click.option(
     "--uid",
     "-u",
+    type=str,
+    required=False,
+    default=None,
+    help="Pass a secrets uid to forget it.",
 )
-def secrets_forget(uid: str):
-    # api_token = secrets.get(selection[0])
-    # subprocess.run("pbcopy", text=True, input=api_token)
-    # vprint(f"[green]{selection[0].title()} Token Copied[/green]")
-    ...
+def secrets_forget(interactive: bool, uid: Optional[str]):
+    if not secrets.count():
+        vprint("No secrets to forget yet.", color="yellow")
+    else:
+        if interactive:
+            title = "Select (spacebar) secret(s), and hit enter to forget."
+            options = secrets.uids
+            selected = pick(options, title, multiselect=True)
+        else:
+            if uid is None:
+                vprint(
+                    "If you are not using interactive mode, you must pass a secret uid.",
+                    color="yellow",
+                )
+            else:
+                if not secrets.exists(uid):
+                    vprint(
+                        "Can't seem to find that secret... Make sure that uid exists. (Hint: run 'secrets list' to check).",
+                        color="yellow",
+                    )
+                else:
+                    secrets.forget(uid=uid)
+                    vprint("Secret forgotten!", color="light_green")
 
 
 # todo: command.security - review revolving, checks
@@ -182,7 +218,9 @@ def secrets_forget(uid: str):
 #     required=True,
 # )
 # def secrets_copy():
-#     pass
+# api_token = secrets.get(selection[0])
+# subprocess.run("pbcopy", text=True, input=api_token)
+# vprint(f"[green]{selection[0].title()} Token Copied[/green]")
 
 
 # @entry.command(name="edit", help="Edit an existing secret.")
