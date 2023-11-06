@@ -9,9 +9,9 @@ nav:
 - quickstart.md
 - tutorial.ipynb
 - cli.md
-- design.md
-- security.md
-- features.md
+# - design.md
+# - security.md
+# - features.md
 - Changelog:
   - changelog/0.1.1.md
   - changelog/0.1.0.md
