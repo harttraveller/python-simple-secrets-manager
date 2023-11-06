@@ -19,8 +19,14 @@ pick = "^2.2.0"
 pydantic = "^2.4.2"
 loguru = "^0.7.2"
 
+[tool.poetry.group.test]
+optional = true
+
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.3"
+
+[tool.poetry.group.docs]
+optional = true
 
 [tool.poetry.group.docs.dependencies]
 mkdocs-material = "^9.4.8"
