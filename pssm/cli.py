@@ -59,21 +59,21 @@ def entry(ctx):
     type=bool,
     default=False,
     required=True,
-    help="if a secret with the same name exists, overwrite it",
+    help="If a secret with the same name exists, overwrite it.",
 )
 @click.option(
     "--uid",
     "-u",
     type=str,
     required=False,
-    help="the uid of the secret to save",
+    help="The uid of the secret to save.",
 )
 @click.option(
     "--key",
     "-k",
     type=str,
     required=False,
-    help="the secret key to save",
+    help="The key to save.",
 )
 # todo: overwrite option
 def secrets_keep(
@@ -116,13 +116,11 @@ def secrets_keep(
 
 
 @entry.command(name="list", help="List secrets in a table.")
-# @click.option("--sort")
-# @click.option("--filter") *regex
+# @click.option("--sort") # todo
+# @click.option("--filter") *regex # todo
 def secrets_list():
     if secrets.count():
         display_secret_table(secrets)
-        # for name in secrets.names:
-        #     vprint(name)
     else:
         vprint("You haven't saved any secrets yet...", color="yellow")
 
