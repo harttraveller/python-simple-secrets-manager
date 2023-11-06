@@ -1,6 +1,7 @@
 site_name: Python Simple Secrets Manager
+site_url: https://www.harttraveller.com/pssm
 repo_name: harttraveller/pssm
-repo_url: https://github.com/harttraveller/python-simple-secrets-manager
+repo_url: https://github.com/harttraveller/pssm
 edit_uri: edit/main/docs/
 
 nav:
