@@ -37,7 +37,6 @@ theme:
   - content.code.annotate
   - navigation.tracking
   - navigation.footer
-  # - navigation.expand
 
 
 plugins:
