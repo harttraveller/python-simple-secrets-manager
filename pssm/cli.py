@@ -150,7 +150,16 @@ def secrets_forget(interactive: bool, uid: Optional[str]):
             title = "Select (spacebar) secret(s), and hit enter to forget."
             options = secrets.uids
             selected = pick(options, title, multiselect=True)
+            if not len(selected):
+                vprint("You did not select any secrets to forget.", color="yellow")
+            else:
+                for secret_uid, _ in selected:
+                    secrets.forget(uid=secret_uid)
+                    vprint(
+                        f"[light_green]Secret forgotten:[/light_green] [cyan]{secret_uid}[/cyan]"
+                    )
         else:
+            # todo: add multiple secret uids for arguments mode
             if uid is None:
                 vprint(
                     "If you are not using interactive mode, you must pass a secret uid.",
@@ -163,7 +172,6 @@ def secrets_forget(interactive: bool, uid: Optional[str]):
                         color="yellow",
                     )
                 else:
-                    secrets.forget(uid=uid)
                     vprint("Secret forgotten!", color="light_green")
 
 
@@ -182,35 +190,90 @@ def secrets_forget(interactive: bool, uid: Optional[str]):
     type=str,
     default=None,
     help="Secret UID.",
-    required=True,
+    required=False,
 )
 def secrets_view(interactive: bool, uid: Optional[str]):
     if not secrets.count():
-        vprint("No secrets to forget yet.", color="yellow")
+        vprint("No secrets to view yet.", color="yellow")
     else:
         if interactive:
             title = "Select (spacebar) secret(s), and hit enter to view them."
             options = secrets.uids
             selected = pick(options, title, multiselect=True)
-    # if (name is None) and (not interactive):
-    #     vprint(
-    #         "\nYou must enter a token name (-n) or use interactive mode (-i).",
-    #         color="red",
-    #     )
+            if not len(selected):
+                vprint("You did not select any secrets to view.", color="yellow")
+            else:
+                for secret_uid, _ in selected:
+                    vprint(
+                        f"[cyan]{secret_uid}:[/cyan] [blue]{secrets.get(uid=secret_uid)}[/blue]"
+                    )
+                vprint(
+                    "You should clear your terminal output after viewing secrets like this for security reasons.",
+                    color="red",
+                )
+        else:
+            # todo: add multiple secret uids for arguments mode
+            if uid is None:
+                vprint(
+                    "If you are not using interactive mode, you must pass a secret uid.",
+                    color="yellow",
+                )
+            else:
+                if not secrets.exists(uid):
+                    vprint(
+                        "Can't seem to find that secret... Make sure that uid exists. (Hint: run 'secrets list' to check).",
+                        color="yellow",
+                    )
+                else:
+                    vprint(f"[cyan]{uid}:[/cyan] [blue]{secrets.get(uid=uid)}[/blue]")
+                    vprint(
+                        "You should clear your terminal output after viewing secrets like this for security reasons.",
+                        color="red",
+                    )
 
 
-# @entry.command(name="copy", help="Copy a secret key to your clipboard.")
-# @click.option(
-#     "--interactive/--arguments",
-#     "-i/-a",
-#     type=bool,
-#     default=False,
-#     required=True,
-# )
-# def secrets_copy():
-#     api_token = secrets.get(selection[0])
-#     subprocess.run("pbcopy", text=True, input=api_token)
-#     vprint(f"[green]{selection[0].title()} Token Copied[/green]")
+@entry.command(name="copy", help="Copy a secret key to your clipboard.")
+@click.option(
+    "--interactive/--arguments",
+    "-i/-a",
+    type=bool,
+    default=True,
+    required=True,
+    help="Interactive mode or arguments mode.",
+)
+@click.option(
+    "--uid",
+    "-u",
+    type=str,
+    default=None,
+    help="Secret UID.",
+    required=False,
+)
+def secrets_copy(interactive: bool, uid: Optional[str]):
+    if not secrets.count():
+        vprint("No secrets to copy yet.", color="yellow")
+    else:
+        if interactive:
+            title = "Select a UID to copy the secret key."
+            options = secrets.uids
+            selected = pick(options, title)
+            to_clipboard(secrets.get(selected[0]))
+            vprint("Secret key copied to clipboard.", color="light_green")
+        else:
+            if uid is None:
+                vprint(
+                    "If you are not using interactive mode, you must pass a secret uid.",
+                    color="yellow",
+                )
+            else:
+                if not secrets.exists(uid):
+                    vprint(
+                        "Can't seem to find that secret... Make sure that uid exists. (Hint: run 'secrets list' to check).",
+                        color="yellow",
+                    )
+                else:
+                    to_clipboard(secrets.get(uid))
+                    vprint("Secret key copied to clipboard.", color="light_green")
 
 
 # todo: command.security - review revolving, checks
