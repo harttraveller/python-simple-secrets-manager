@@ -35,8 +35,6 @@ Easier to work with than environment variables, but not particularly secure - th
 <!-- ## Changelog -->
 
 
-## edges
-- [[simple-secrets-manager]]
 
 
 ## links
