@@ -169,6 +169,45 @@ def secrets_forget(interactive: bool, uid: Optional[str]):
                     vprint("Secret forgotten!", color="light_green")
 
 
+@entry.command(name="view", help="View the key for a secret.")
+@click.option(
+    "--interactive/--arguments",
+    "-i/-a",
+    type=bool,
+    default=False,
+    required=True,
+)
+@click.option(
+    "--name",
+    "-n",
+    type=str,
+    default=None,
+    help="Name of API token.",
+    required=True,
+)
+def secrets_view(interactive: bool, name: Optional[str]):
+    pass
+    # if (name is None) and (not interactive):
+    #     vprint(
+    #         "\nYou must enter a token name (-n) or use interactive mode (-i).",
+    #         color="red",
+    #     )
+
+
+# @entry.command(name="copy", help="Copy a secret key to your clipboard.")
+# @click.option(
+#     "--interactive/--arguments",
+#     "-i/-a",
+#     type=bool,
+#     default=False,
+#     required=True,
+# )
+# def secrets_copy():
+#     api_token = secrets.get(selection[0])
+#     subprocess.run("pbcopy", text=True, input=api_token)
+#     vprint(f"[green]{selection[0].title()} Token Copied[/green]")
+
+
 # todo: command.security - review revolving, checks
 # todo: command.peek
 # todo: keep
@@ -182,45 +221,6 @@ def secrets_forget(interactive: bool, uid: Optional[str]):
 # @entry.command(name="find", help="View the names of the saved secrets.")
 # def secrets_find():
 #     pass
-
-
-# @entry.command(name="view", help="View a secret for a token.")
-# @click.option(
-#     "--interactive/--arguments",
-#     "-i/-a",
-#     type=bool,
-#     default=False,
-#     required=True,
-# )
-# @click.option(
-#     "--name",
-#     "-n",
-#     type=str,
-#     default=None,
-#     help="Name of API token.",
-#     required=True,
-# )
-# def secrets_view(interactive: bool, name: Optional[str]):
-#     pass
-#     # if (name is None) and (not interactive):
-#     #     vprint(
-#     #         "\nYou must enter a token name (-n) or use interactive mode (-i).",
-#     #         color="red",
-#     #     )
-
-
-# @entry.command(name="copy", help="Copy a secret key to your clipboard.")
-# @click.option(
-#     "--interactive/--arguments",
-#     "-i/-a",
-#     type=bool,
-#     default=False,
-#     required=True,
-# )
-# def secrets_copy():
-# api_token = secrets.get(selection[0])
-# subprocess.run("pbcopy", text=True, input=api_token)
-# vprint(f"[green]{selection[0].title()} Token Copied[/green]")
 
 
 # @entry.command(name="edit", help="Edit an existing secret.")
