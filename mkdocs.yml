@@ -12,6 +12,7 @@ nav:
 - security.md
 - features.md
 - Changelog:
+  - changelog/0.1.1.md
   - changelog/0.1.0.md
 
 theme:
