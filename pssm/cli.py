@@ -132,7 +132,7 @@ def secrets_list():
     type=bool,
     default=True,
     required=True,
-    help="Interactive mode or arguments.",
+    help="Interactive mode or arguments mode.",
 )
 @click.option(
     "--uid",
@@ -172,19 +172,26 @@ def secrets_forget(interactive: bool, uid: Optional[str]):
     "--interactive/--arguments",
     "-i/-a",
     type=bool,
-    default=False,
+    default=True,
     required=True,
+    help="Interactive mode or arguments mode.",
 )
 @click.option(
-    "--name",
-    "-n",
+    "--uid",
+    "-u",
     type=str,
     default=None,
-    help="Name of API token.",
+    help="Secret UID.",
     required=True,
 )
-def secrets_view(interactive: bool, name: Optional[str]):
-    pass
+def secrets_view(interactive: bool, uid: Optional[str]):
+    if not secrets.count():
+        vprint("No secrets to forget yet.", color="yellow")
+    else:
+        if interactive:
+            title = "Select (spacebar) secret(s), and hit enter to view them."
+            options = secrets.uids
+            selected = pick(options, title, multiselect=True)
     # if (name is None) and (not interactive):
     #     vprint(
     #         "\nYou must enter a token name (-n) or use interactive mode (-i).",
