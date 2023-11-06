@@ -1,5 +1,5 @@
 site_name: Python Simple Secrets Manager
-repo_name: python-simple-secrets-manager
+repo_name: harttraveller/pssm
 repo_url: https://github.com/harttraveller/python-simple-secrets-manager
 edit_uri: edit/main/docs/
 
@@ -21,6 +21,7 @@ theme:
   logo: assets/icon.png
   icon:
     annotation: material/plus-circle
+    repo: fontawesome/brands/github
   font:
     text: Inter
     code: Ubuntu Mono
