@@ -6,15 +6,13 @@ edit_uri: edit/main/docs/
 nav:
 - index.md
 - quickstart.md
-- Tutorial: tutorial.ipynb
-- Reference:
-  - reference/cli.md
-  - reference/package.md
-- Details:
-  - details/design.md
-  - details/security.md
-  - details/features.md
-  - details/changelog.md
+- tutorial.ipynb
+- cli.md
+- design.md
+- security.md
+- features.md
+- Changelog:
+  - changelog/0.1.0.md
 
 theme:
   name: material
