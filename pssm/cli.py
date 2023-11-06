@@ -25,7 +25,7 @@ def partial_hide_secret(secret: str):
 
 
 def display_secret_table(secrets: SecretHandler):
-    table = Table(title="Secrets", min_width=80)
+    table = Table(title="Secrets", min_width=40)
     table.add_column("UID", justify="left", style="cyan", no_wrap=True)
     table.add_column("Key", justify="left", style="magenta", no_wrap=True)
     for secret_name, secret_data in secrets.data.items():
@@ -172,6 +172,7 @@ def secrets_forget(interactive: bool, uid: Optional[str]):
                         color="yellow",
                     )
                 else:
+                    secrets.forget(uid=uid)
                     vprint("Secret forgotten!", color="light_green")
 
 
