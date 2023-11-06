@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "python-simple-secrets-manager"
 packages = [{ include = "pssm" }]
-version = "0.1.0"
+version = "0.1.1"
 description = "A simple python based secrets manager."
 readme = "README.md"
 repository = "https://github.com/harttraveller/python-simple-secrets-manager"
