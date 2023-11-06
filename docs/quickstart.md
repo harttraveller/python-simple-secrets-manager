@@ -51,4 +51,4 @@ from pssm import secrets
 token = secrets.get("secret_uid")
 ```
 
-More details on other available commands/methods, and how the package works on the backend are available in the [[tutorial.ipynb|tutorial]] notebook.
+More details on other available commands/methods can be found in the [[tutorial.ipynb|tutorial]] notebook.
